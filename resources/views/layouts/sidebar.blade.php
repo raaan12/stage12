@@ -23,41 +23,41 @@
 
         <li class="nav-item {{ request()->is('category*') ? 'active' : '' }}">
             <a href="{{ route('categories.index') }}">
-                <i class="fas fa-tshirt"></i>
+                <i class="fas fa-gift"></i>
                 <span class="menu-title" data-i18n="">Categories</span>
             </a>
         </li>
 
         <li class="nav-item {{ request()->is('commandes*') ? 'active' : '' }}">
             <a href="{{ route('commandes.index') }}">
-                <i class="fas fa-tshirt"></i>
+                <i class="fas fa-shopping-cart"></i>
                 <span class="menu-title" data-i18n="">Commandes</span>
             </a>
         </li>
 
         <li class="nav-item {{ request()->is('message*') ? 'active' : '' }}">
             <a href="{{ route('messages.index') }}">
-                <i class="fas fa-tshirt"></i>
+                <i class="fas fa-envelope"></i>
                 <span class="menu-title" data-i18n="">Messages</span>
             </a>
         </li>
 
         <li class="nav-item {{ request()->is('employee*') ? 'active' : '' }}">
             <a href="{{ route('employe.index') }}">
-                <i class="fas fa-tshirt"></i>
+                <i class="fas fa-user-tag"></i>
                 <span class="menu-title" data-i18n="">Employees</span>
             </a>
         </li>
         <li class="nav-item {{ request()->is('color*') ? 'active' : '' }}">
             <a href="{{ route('colors.index') }}">
-                <i class="fas fa-tshirt"></i>
+                <i class="fas fa-palette"></i>
                 <span class="menu-title" data-i18n="">Colors</span>
             </a>
         </li>
 
         <li class="nav-item {{ request()->is('size*') ? 'active' : '' }}">
             <a href="{{ route('sizes.index') }}">
-                <i class="fas fa-tshirt"></i>
+                <i class="fas fa-ruler"></i>
                 <span class="menu-title" data-i18n="">Sizes</span>
             </a>
         </li>

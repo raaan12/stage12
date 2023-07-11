@@ -2,8 +2,7 @@
 @section('content')
    <div class="d-flex align-items-center justify-content-between">
         <h1 class="mb-0">List Employees</h1>
-        <a href="{{ route('emplye.create') }}" type="button" class="btn btn-secondary">Add new Product</a>
-
+        <a href="" type="button" class="btn btn-secondary">Add new admin</a>
     </div>
     <hr />
     @if(Session::has('success'))
@@ -39,10 +38,10 @@
 
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('employe.details', $rs->id) }}" type="button" class="btn btn-secondary">Detail</a>
-                                <a href="{{ route('employe.edit', $rs->id)}}" type="button" class="btn btn-warning">Edit</a>       
+                                <a href="{{ route('profile.edit')}}" type="button" class="btn btn-secondary">Detail</a>
+                                <a href="{{ route('profile.edit')}}" type="button" class="btn btn-warning">Edit</a>       
                                 
-                                <form action="{{ route('employe.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete user number {{ $rs->id }} ?')">
+                                <form action="{{ route('profile.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete user number {{ $rs->id }} ?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-0">Delete</button>

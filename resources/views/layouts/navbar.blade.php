@@ -171,8 +171,6 @@
     </li>
 
     <div class="topbar-divider d-none d-sm-block"></div>
-
-    <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -202,7 +200,19 @@
             </a>
         </div>
     </li>
+    <li class="nav-item dropdown no-arrow">
 
+    <!-- Authentication -->
+<form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+    </li>
 </ul>
 
 </nav>

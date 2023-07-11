@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('role', ['client', 'admin'])->default('client');
+            $table->string('role')->default('client');
             $table->string('phone_number')->regex('/^\+216-[0-9]{2}-[0-9]{3}-[0-9]{3}$/')->nullable();
             $table->string('adress')->nullable();
             $table->timestamp('email_verified_at')->nullable();
