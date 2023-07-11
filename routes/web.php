@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::match(['patch', 'get'], '/profile/{profile}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -68,3 +68,7 @@ Route::get('CategoryShow/{id}', 'App\Http\Controllers\CategoryController@show')-
 Route::get('CategoryEdit/{id}', 'App\Http\Controllers\CategoryController@edit')->name('categories.edit');
 Route::put('/CategoryEdit/{id}', 'App\Http\Controllers\CategoryController@update')->name('categories.update');
 Route::delete('CategoryDestroy/{id}', 'App\Http\Controllers\CategoryController@destroy')->name('categories.destroy');
+
+Route::get('show/{id}', 'App\Http\Controllers\CommandeController@show')->name('commandes.details');
+Route::get('edit/{id}', 'App\Http\Controllers\CommandeController@edit')->name('commandes.edit');
+Route::put('edit/{id}', 'App\Http\Controllers\CommandeController@update')->name('commandes.update');

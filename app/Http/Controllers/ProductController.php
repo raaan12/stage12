@@ -74,12 +74,9 @@ public function store(Request $request)
      */
     public function edit(string $id)
     {
-        {
             $product = Product::findOrFail($id);
             $categories = Category::all(); // Fetch all categories
-        
             return view('products.edit', compact('product', 'categories'));
-        }
     }
 
     /**

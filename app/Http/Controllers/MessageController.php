@@ -12,7 +12,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('messages.index');
+        $message = Message::orderBy('created_at', 'DESC')->get();
+        return view('messages.index',compact('message'));
     }
 
     /**

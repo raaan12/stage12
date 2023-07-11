@@ -14,21 +14,27 @@
         <thead class="table-primary">
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Update/Delete</th>
+                <th>title</th>
+                <th>corps</th>
+                <th>email_sender</th>
 
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td></td>           
-                <td></td>
-                <td>
-                    <button type="button" style="width: 30%; font-size: 24px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #B4E7FF; border:none; border-radius: 6px;" >update</button>
-                    <button type="button" style="width: 30%; font-size: 24px; cursor: pointer; text-align: center; text-decoration: none; outline: none; color: #fff; background-color: #B4E7FF; border:none; border-radius: 6px;" >delete</button>
-                </td>
+        @if($message->count() > 0)
+                @foreach($message as $rs)
+                    <tr>
+                        <td class="align-middle">{{ $rs->id }}</td>
+                        <td class="align-middle">{{ $rs->title }}</td>
+                        <td class="align-middle">{{ $rs->corps }}</td>
+                        <td class="align-middle">{{ $rs->clientId}}</td>
 
-            </tr>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td class="text-center" colspan="5">empty table</td>
+                </tr>
+            @endif
         </tbody>
     </table>
 @endsection

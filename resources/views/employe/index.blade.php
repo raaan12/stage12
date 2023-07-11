@@ -38,8 +38,13 @@
 
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('profile.edit')}}" type="button" class="btn btn-secondary">Detail</a>
-                                <a href="{{ route('profile.edit')}}" type="button" class="btn btn-warning">Edit</a>       
+                             
+                             
+                            <form action="{{ route('profile.edit', $rs->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-warning">Edit</button>
+                            </form>
                                 
                                 <form action="{{ route('profile.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete user number {{ $rs->id }} ?')">
                                     @csrf

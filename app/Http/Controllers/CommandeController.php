@@ -12,7 +12,8 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        return view('commandes.index');
+        $commande = Commande::orderBy('created_at', 'DESC')->get();
+        return view('commandes.index', compact('commande'));    
     }
 
     /**
