@@ -6,7 +6,7 @@
     @foreach ($accessories as $accessory)
         <div class="col-md-4">
             <div class="card mb-4">
-                <img src="{{ $accessory->photo }}" class="card-img-top" alt="{{ $accessory->name }}">
+            <img src="{{ asset('storage/' . $accessory->photo) }}" class="card-img-top" alt="{{ $accessory->name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $accessory->name }}</h5>
                     <p class="card-text">{{ $accessory->description }}</p>

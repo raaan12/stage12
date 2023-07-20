@@ -21,7 +21,7 @@ class ClothesSeeder extends Seeder
         $faker = Faker::create();
 
         // Define the categories you want to associate the products with
-        $categories = [1]; // Replace with your actual category IDs
+        $categories = [2,1]; // Replace with your actual category IDs
 
         foreach (range(1, 20) as $index) {
             $name = $faker->unique()->word;
