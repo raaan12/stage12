@@ -35,10 +35,15 @@
 </style>
 <div class="container">
         <div class="form-wrapper">   
-<h1 class="mb-0">Detail Product</h1>
-
-    
+<h1 class="mb-0">Detail Product</h1>   
     <hr />
+    <div class="col mb-3">
+        @if ($product->photo)
+            <img src="{{ asset('storage/' . $product->photo) }}" alt="{{ $product->name }}" style="max-height: 200px; max-width: 200px;">
+        @else
+            No Image
+        @endif   
+    </div>
     <div class="row">
         <div class="col mb-3">
             <label class="form-label">Name</label>
@@ -63,6 +68,8 @@
             <textarea class="form-control" name="description" placeholder="Descriptoin" readonly>{{ $product->description }}</textarea>
         </div>
     </div>
+    
+
     <div class="row">
         <div class="col mb-3">
             <label class="form-label">Created At</label>

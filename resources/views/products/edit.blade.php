@@ -78,6 +78,11 @@
                 <textarea class="form-control" name="description" placeholder="Descriptoin" >{{ $product->description }}</textarea>
             </div>
         </div>
+        <div class="col mb-3">
+                <div class="col">
+                    <input type="file" name="photo" class="form-control">
+                </div>
+        </div>
         <div class="row">
             <div class="d-grid">
                 <button class="btn btn-primary">Update</button>

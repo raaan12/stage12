@@ -13,13 +13,13 @@ class ClientController extends Controller
     }
     public function clothes()
     {
-        $clothes = Product::all();
-        return view('client.clothes',compact('clothes'));
+        $clothes = Product::where('categoryId', 1)->get();
+        return view('client.clothes', compact('clothes'));
     } 
     
     public function accessories()
     {
-        $accessories = Product::all();
+        $accessories = Product::where('categoryId', 2)->get();// to get the product with accessories category
         return view('client.accessories', compact('accessories'));
     } 
 

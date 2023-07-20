@@ -1,7 +1,13 @@
 @extends('client.layouts.main')
 @section('content')
-<h1>Clothes</h1>
+<br>
+<br>
+<br>
 
+<h1 style="  font-family: courier; font-size: 70px; font-weight: 600; background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text; margin-left: 600px;">Clothes</h1>
 <div class="row">
     @foreach ($clothes as $clothe)
         <div class="col-md-4">

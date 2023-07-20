@@ -91,9 +91,9 @@ public function store(Request $request)
      {
         $product = Product::findOrFail($id);
    
-         $product->update($request->all());
+        $product->update($request->all());
    
-         return redirect()->route('products.index')->with('success', 'Product updated successfully');
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
     /**
