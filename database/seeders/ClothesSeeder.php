@@ -6,37 +6,41 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 class ClothesSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        // Sample data for seeding
-        $products = [
-            [
-                'name' => 'Product 1',
-                'description' => 'Description for Product 1',
-                'price' => 29.99,
-                'quantity' => 100,
-                'categoryId' => 1,
-                'photo' => 'product1.jpg',
-            ],
-            [
-                'name' => 'Product 2',
-                'description' => 'Description for Product 2',
-                'price' => 19.99,
-                'quantity' => 50,
-                'categoryId' => 1,
-                'photo' => 'product2.jpg',
-            ],
-            // Add more products here
-        ];
+        $faker = Faker::create();
 
-        // Insert the data into the 'products' table
-        foreach ($products as $productData) {
-            Product::create($productData);
+        // Define the categories you want to associate the products with
+        $categories = [1]; // Replace with your actual category IDs
+
+        foreach (range(1, 20) as $index) {
+            $name = $faker->unique()->word;
+            $description = $faker->sentence;
+            $price = $faker->randomFloat(2, 10, 100);
+            $quantity = $faker->numberBetween(1, 100);
+            $categoryId = $faker->randomElement($categories);
+
+            // Generate a random image and save it in the storage directory
+            $imagePath = $faker->image(storage_path('app/public/product_images'), 200, 200, 'products', false);
+
+            DB::table('products')->insert([
+                'name' => $name,
+                'description' => $description,
+                'price' => $price,
+                'quantity' => $quantity,
+                'categoryId' => $categoryId,
+                'photo' => 'product_images/' . basename($imagePath), // Save the relative path to the image
+            ]);
         }
     }
 }
