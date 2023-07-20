@@ -38,39 +38,53 @@
         <div class="form-wrapper">
 <h1 class="mb-0">Add employe</h1>
     <hr />
-    <form action="{{ route('emplye.store') }}" method="POST" enctype="multipart/form-data">
+     <form method="POST" action="{{ route('register') }}">
         @csrf
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" name="name" class="form-control" placeholder="name">
-            </div>
-            <div class="col">
-                <input type="text" name="email" class="form-control" placeholder="email">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" name="role" class="form-control" placeholder="role">
-            </div>
-            <div class="col">
-            <input type="text" name="phone_number" class="form-control" placeholder="phone_number">
-            </div>
+
+        <!-- Name -->
+        <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" name="adress" class="form-control" placeholder="adress">
-            </div>
-            <div class="col">
-            <input type="text" name="password" class="form-control" placeholder="password">
-            </div>
+        <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
- 
-        <div class="row">
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">save</button>
-                <a href="{{ route('colors.index')}}" type="button" class="btn btn-warning">cancel</a>       
-            </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                            type="password"
+                            name="password_confirmation" required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a>
+
+
+            <button type="submite" class="btn btn-danger m-0">Register</button>
         </div>
     </form>
         </div>

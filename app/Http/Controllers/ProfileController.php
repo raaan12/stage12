@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -20,15 +18,21 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Display the user's profile form.
-     */
-
-
-    public function edit(string $id)
+    public function create()
     {
-            $employe = User::findOrFail($id);
-            return view('profile.edit', compact('employe'));
+        return view('employe.create');
+    }
+
+    public function store(Request $request)
+    {
+        User::create($request->all());
+        return redirect()->route('employe.index')->with('success', 'employe added successfully');
+    }
+
+    public function edit($profile)
+    {
+            $profile = User::findOrFail($profile);
+            return view('profile.edit', compact('profile'));
     }
 
 
@@ -37,18 +41,16 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+     public function update(Request $request, string $id)
+     {
+        $user = User::findOrFail($id);
+   
+         $user->update($request->all());
+   
+         return redirect()->route('employe.index')->with('success', 'employe updated successfully');
     }
+
 
     /**
      * Delete the user's account.
@@ -67,7 +69,6 @@ class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return Redirect::to('/');
     }
 }

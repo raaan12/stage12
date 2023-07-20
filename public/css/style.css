@@ -1,4 +1,4 @@
---------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+/*--------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
 @import url(animate.min.css);
@@ -212,12 +212,11 @@ button {
 /* banner bg main start */
 
 .banner_bg_main {
-    width: 100%;
-    float: left;
-    background-image: url(../images/banner-bg.png);
-    height: auto;
-    background-size: 100%;
+    background-image: url(../images/crochet1.jpg); /* Remplacez les noms de fichiers par vos propres images */
+    background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
 
@@ -229,10 +228,12 @@ button {
 .header_section_top {
     width: 100%;
     float: left;
-    background-color: #2b2a29;
-    clip-path: polygon(0 0, 100% 0, 96% 100%, 3% 100%);
+    color: #000;
+    background-color: #ffedd3;
+    clip-path: polygon(0 0, 100% 0, 120% 100%, -20% 100%);
     height: auto;
     padding: 10px 0px;
+    opacity: 0.9;
 }
 
 .custom_menu {
@@ -250,12 +251,12 @@ button {
 .custom_menu li {
     float: left;
     font-size: 16px;
-    color: #f1f1f1;
+    color: #000000;
     padding: 6px 10px 0px 10px;
 }
 
 .custom_menu li a {
-    color: #f1f1f1;
+    color: #000000;
 }
 
 .custom_menu li a:hover {
@@ -305,7 +306,8 @@ button {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #ffedd3;
+    opacity: 0.7;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -315,7 +317,7 @@ button {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 20px;
-    color: #ffffff;
+    color: #000000;
     display: block;
     transition: 0.3s;
 }
@@ -365,18 +367,22 @@ button {
 }
 
 .btn-secondary {
-    color: #fff;
-    background-color: #30302e;
-    border-color: #30302e;
+    color: #000000;
+    background-color: #ffedd3;
+    opacity: 0.8;
+    border: none;
 }
 
 .btn-secondary:hover {
-    color: #fff;
-    background-color: #30302e;
-    border-color: #30302e;
+    color: #000000;
+    background-color: #f26522;
+    border-color: #f26522;
 }
 
 .show>.btn-secondary.dropdown-toggle:focus {
+    color: #ffffff;
+    background-color: #f26522;
+    border-color: #f26522;
     box-shadow: none;
 }
 
@@ -675,92 +681,6 @@ a:hover {
 
 
 /* fashion section end */
-
-
-/* electronic section start */
-
-.electronic_img {
-    width: 100%;
-    text-align: center;
-    margin: 50px 0px;
-    min-height: 293px;
-}
-
-#electronic_main_slider a.carousel-control-next {
-    right: 615px;
-    top: 105%;
-}
-
-#electronic_main_slider a.carousel-control-prev {
-    left: 615px;
-    top: 105%;
-}
-
-#electronic_main_slider .carousel-control-next,
-#electronic_main_slider .carousel-control-prev {
-    width: 55px;
-    height: 55px;
-    background-color: #30302e;
-    opacity: 1;
-    font-size: 30px;
-    color: #ffffff;
-}
-
-#electronic_main_slider .carousel-control-next:focus,
-#electronic_main_slider .carousel-control-next:hover,
-#electronic_main_slider .carousel-control-prev:focus,
-#electronic_main_slider .carousel-control-prev:hover {
-    color: #fff;
-    background-color: #f26522;
-}
-
-
-/* electronic section end */
-
-
-/* jewellery section start */
-
-.jewellery_section {
-    width: 100%;
-    float: left;
-    padding-bottom: 50px;
-}
-
-.jewellery_img {
-    width: 100%;
-    text-align: center;
-    margin: 50px 0px;
-    min-height: 293px;
-}
-
-#jewellery_main_slider a.carousel-control-next {
-    right: 615px;
-    top: 75%;
-}
-
-#jewellery_main_slider a.carousel-control-prev {
-    left: 615px;
-    top: 75%;
-}
-
-#jewellery_main_slider .carousel-control-next,
-#jewellery_main_slider .carousel-control-prev {
-    width: 55px;
-    height: 55px;
-    background-color: #30302e;
-    opacity: 1;
-    font-size: 30px;
-    color: #ffffff;
-}
-
-#jewellery_main_slider .carousel-control-next:focus,
-#jewellery_main_slider .carousel-control-next:hover,
-#jewellery_main_slider .carousel-control-prev:focus,
-#jewellery_main_slider .carousel-control-prev:hover {
-    color: #fff;
-    background-color: #f26522;
-}
-
 
 /* loader bar css start */
 

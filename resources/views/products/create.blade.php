@@ -64,7 +64,11 @@
                 <textarea class="form-control" name="description" placeholder="description"></textarea>
             </div>
         </div>
- 
+        <div class="row mb-3">
+                <div class="col">
+                    <input type="file" name="photo" class="form-control">
+                </div>
+            </div>
         <div class="row">
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">save</button>

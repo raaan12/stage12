@@ -2,7 +2,7 @@
 @section('content')
    <div class="d-flex align-items-center justify-content-between">
         <h1 class="mb-0">List Employees</h1>
-        <a href="" type="button" class="btn btn-secondary">Add new admin</a>
+        <a href="{{ route('employe.create') }}" type="button" class="btn btn-secondary">Add new Admin</a>
     </div>
     <hr />
     @if(Session::has('success'))
@@ -40,11 +40,7 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                              
                              
-                            <form action="{{ route('profile.edit', $rs->id) }}" method="POST">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="btn btn-warning">Edit</button>
-                            </form>
+                                <a href="{{ route('profile.edit', $rs) }}" class="btn btn-warning">Edit</a>
                                 
                                 <form action="{{ route('profile.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete user number {{ $rs->id }} ?')">
                                     @csrf

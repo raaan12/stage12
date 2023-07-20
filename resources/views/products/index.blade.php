@@ -36,7 +36,13 @@
                         <td class="align-middle">{{ $rs->description }}</td>  
                         <td class="align-middle">{{ $rs->price }}</td>
                         <td class="align-middle">{{ $rs->quantity }}</td>
-                        <td></td>
+                        <td class="align-middle"> 
+                            @if ($rs->photo)
+                                <img src="{{ asset('storage/' . $rs->photo) }}" alt="{{ $rs->name }}" style="max-height: 100px; max-width: 100px;">
+                            @else
+                                No Image
+                            @endif
+                        </td>
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('products.details', $rs->id) }}" type="button" class="btn btn-secondary">Detail</a>

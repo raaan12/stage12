@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SizeController;
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,34 +21,45 @@ use App\Http\Controllers\SizeController;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('products.index');
 
+
+
+/*  Client part  */
+Route::get('/clothes', 'App\Http\Controllers\ClientController@clothes')->name('client.clothes');
+Route::get('/client', 'App\Http\Controllers\ClientController@index')->name('client.index');
+Route::get('/accessories', 'App\Http\Controllers\ClientController@accessories')->name('client.accessories');
+Route::get('/About Us', 'App\Http\Controllers\ClientController@about')->name('client.aboutus');
+Route::get('/contact', 'App\Http\Controllers\ClientController@contact')->name('client.contact');
+
+
+
+
+/*  Admin part  */
+Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('products.index');
 Route::get('/category', 'App\Http\Controllers\CategoryController@index')->name('categories.index');
 Route::get('/commandes', 'App\Http\Controllers\CommandeController@index')->name('commandes.index');
 Route::get('/message', 'App\Http\Controllers\MessageController@index')->name('messages.index');
 Route::get('/employee', 'App\Http\Controllers\ProfileController@index')->name('employe.index');
+Route::get('/employeCreate', 'App\Http\Controllers\ProfileController@create')->name('employe.create');
+Route::post('employeStore', 'App\Http\Controllers\ProfileController@store')->name('employe.store');
 Route::get('/color', 'App\Http\Controllers\ColorController@index')->name('colors.index');
 Route::get('/size', 'App\Http\Controllers\SizeController@index')->name('sizes.index');
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
-    Route::match(['patch', 'get'], '/profile/{profile}', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/{profile}', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
 
 Route::get('/ProductCreate', 'App\Http\Controllers\ProductController@create')->name('products.create');
 Route::post('store', 'App\Http\Controllers\ProductController@store')->name('products.store');
-Route::get('show/{id}', 'App\Http\Controllers\ProductController@show')->name('products.details');
-Route::get('edit/{id}', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
-Route::put('edit/{id}', 'App\Http\Controllers\ProductController@update')->name('products.update');
+Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('products.details');
+Route::get('/products/{id}/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
+Route::put('/products/{id}', 'App\Http\Controllers\ProductController@update')->name('products.update');
 Route::delete('destroy/{id}', 'App\Http\Controllers\ProductController@destroy')->name('products.destroy');
 
 Route::get('/ColorCreate', 'App\Http\Controllers\ColorController@create')->name('colors.create');

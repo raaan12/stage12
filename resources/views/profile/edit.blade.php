@@ -1,40 +1,86 @@
 @extends('layouts.main')
-
 @section('content')
-    <!-- Votre code de formulaire de mise à jour de profil ici -->
+<style>
+    .container {
+        margin-top: 10%;
+        margin-left: 25%;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Mise à jour du profil') }}
-        </h2>
-    </x-slot>
+    .form-wrapper {
+        max-width: 500px;
+        padding: 40px;
+        background: linear-gradient(#DFD9FF, #FCFFD9);
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('profile.update', $employe->id) }}" method="POST">
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .col-form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 0;
+    }
+
+    .btn-warning {
+        border-radius: 0;
+    }
+</style>
+
+
+<div class="container">
+    <div class="form-wrapper">
+    <h1 class="mb-0">Edit Admin</h1>
+        <hr />
+        @if(Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+    <form action="{{ route('profile.update',$profile) }}" method="POST">
                         @csrf
                         @method('PATCH')
-                        
-                        <div>
-                            <label for="name" class="block font-medium text-sm text-gray-700">Nom</label>
-                            <input type="text" name="name" id="name" value="{{ $employe->name }}" class="form-input rounded-md shadow-sm mt-1 block w-full">
-                        </div>
-
-                        <div class="mt-4">
-                            <label for="email" class="block font-medium text-sm text-gray-700">Adresse e-mail</label>
-                            <input type="email" name="email" id="email" value="{{ $employe->email }}" class="form-input rounded-md shadow-sm mt-1 block w-full">
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mettre à jour</button>
-                        </div>
-                    </form>
-                </div>
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="name" class="form-control" value="{{ $profile->name }}" placeholder="Name" >
+            </div>
+            <div class="col">
+                <input type="email" name="email" class="form-control" value="{{ $profile->email }}" placeholder="Email">
             </div>
         </div>
+        
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="role" class="form-control" value="{{ $profile->role }}"  placeholder="Role">
+            </div>
+            <div class="col">
+                <input type="text" name="phone_number" class="form-control" value="{{ $profile->phone_number }}"  placeholder="Phone_number">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="adress" class="form-control" value="{{ $profile->adress }}" placeholder="Adress">
+            </div>
+            <div class="col">
+                <input type="password" name="password" class="form-control" value="{{ $profile->password }}" placeholder="Password">
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('employe.index')}}" type="button" class="btn btn-warning">cancel</a>       
+
+            </div>
+        </div>
+    </form>
     </div>
-</x-app-layout>
+</div>
 @endsection
