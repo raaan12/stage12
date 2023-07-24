@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -90,11 +91,32 @@ public function store(Request $request)
      public function update(Request $request, string $id)
      {
         $product = Product::findOrFail($id);
-   
-        $product->update($request->all());
-   
-        return redirect()->route('products.index')->with('success', 'Product updated successfully');
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->quantity= $request->quantity;
+        $product->categoryId = $request->categoryId;
+        
+// Handle the image update
+if ($request->hasFile('photo')) {
+    // Delete the old image if it exists
+    if ($product->photo && Storage::exists('public/' . $product->photo)) {
+        Storage::delete('public/' . $product->photo);
     }
+    
+    // Save the new image and update the product's photo field
+    $imagePath = $request->file('photo')->store('product_images', 'public');
+    $product->photo = $imagePath;
+}
+
+// Save the updated product
+$product->save();
+return redirect()->route('products.index')->with('success', 'Product updated successfully');
+}
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -106,4 +128,31 @@ public function store(Request $request)
         $product->delete();
   
         return redirect()->route('products.index')->with('success', 'product deleted successfully');    }
+
+
+
+    public function cart()
+    {
+        return view('cart');
+    }
+    public function addToCart($id)
+    {
+        $product = Product::findOrFail($id);
+ 
+        $cart = session()->get('cart', []);
+ 
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        }  else {
+            $cart[$id] = [
+                "product_name" => $product->product_name,
+                "photo" => $product->photo,
+                "price" => $product->price,
+                "quantity" => 1
+            ];
+        }
+ 
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product add to cart successfully!');
+    }
 }

@@ -11,7 +11,6 @@
             {{ Session::get('success') }}
         </div>
     @endif
-
     <table class="table table-hover">
         <thead class="table-primary">
             <tr>
@@ -38,7 +37,7 @@
                         <td class="align-middle">{{ $rs->quantity }}</td>
                         <td class="align-middle"> 
                             @if ($rs->photo)
-                                <img src="{{ asset('storage/' . $rs->photo) }}" alt="{{ $rs->name }}" style="max-height: 100px; max-width: 100px;">
+                                <img src="{{ asset('storage/' . $rs->photo) }}" alt="{{'no picture'}}" style="max-height: 100px; max-width: 100px;">
                             @else
                                 No Image
                             @endif

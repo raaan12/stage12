@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col mb-3">
                 <label class="form-label">Product quantity</label>
-                <input type="text" name="product_quantity" class="form-control" placeholder="Product quantity" value="{{ $product->quantity }}" >
+                <input type="text" name="quantity" class="form-control" placeholder="Quantity" value="{{ $product->quantity	 }}" >
             </div>
             <div class="col mb-3">
                 <label class="form-label">Description</label>
@@ -80,7 +80,7 @@
         </div>
         <div class="col mb-3">
                 <div class="col">
-                    <input type="file" name="photo" class="form-control">
+                    <input type="file" name="photo" class="form-control" >
                 </div>
         </div>
         <div class="row">
