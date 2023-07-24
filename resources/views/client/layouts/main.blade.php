@@ -35,11 +35,18 @@
 
 
 
-      <!-- fashion section start -->
-      <div class="fashion_section">
+   
+<br/>
+<div class="container">
+   
+    @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div> 
+    @endif
+
         @yield('content')
-      </div>
-      <!-- fashion section end -->
+</div>
 
 
 

@@ -19,7 +19,7 @@
                     <p class="card-text">{{ $accessory->description }}</p>
                     <p class="card-text">Price: {{ $accessory->price }} dt</p>
                     <p class="card-text">Quantity: {{ $accessory->quantity }}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <p class="btn btn-primary"><a href="{{ route('add_to_cart', $accessory->id) }}" class="btn btn-primary btn-block text-center" role="button">Add to cart</a> </p>
                 </div>
             </div>
         </div>

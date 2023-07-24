@@ -9,8 +9,8 @@
                            <li><a href="{{ route('client.accessories') }}">Accessories</a></li>
                            <li><a href="{{ route('client.aboutus') }}">About us</a></li>
                            <li><a href="{{ route('client.contact') }}">Contact</a></li>
-
                         </ul>
+                        
                      </div>
                   </div>
                </div>

@@ -133,7 +133,9 @@ return redirect()->route('products.index')->with('success', 'Product updated suc
 
     public function cart()
     {
-        return view('cart');
+        $product = Product::orderBy('quantity', 'DESC')->get();
+
+        return view('client.cart',compact('product'));
     }
     public function addToCart($id)
     {
@@ -145,7 +147,7 @@ return redirect()->route('products.index')->with('success', 'Product updated suc
             $cart[$id]['quantity']++;
         }  else {
             $cart[$id] = [
-                "product_name" => $product->product_name,
+                "name" => $product->name,
                 "photo" => $product->photo,
                 "price" => $product->price,
                 "quantity" => 1
@@ -154,5 +156,26 @@ return redirect()->route('products.index')->with('success', 'Product updated suc
  
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product add to cart successfully!');
+    }
+    public function updatecart(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart successfully updated!');
+        }
+    }
+ 
+    public function removecart(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product successfully removed!');
+        }
     }
 }

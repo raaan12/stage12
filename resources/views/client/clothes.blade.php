@@ -18,7 +18,8 @@
                     <p class="card-text">{{ $clothe->description }}</p>
                     <p class="card-text">Price: {{ $clothe->price }} dt</p>
                     <p class="card-text">Quantity: {{ $clothe->quantity }}</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <p class="btn btn-primary"><a href="{{ route('add_to_cart', $clothe->id) }}" class="btn btn-primary btn-block text-center" role="button">Add to cart</a> </p>
+
                 </div>
             </div>
         </div>

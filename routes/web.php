@@ -31,6 +31,11 @@ Route::get('/accessories', 'App\Http\Controllers\ClientController@accessories')-
 Route::get('/About Us', 'App\Http\Controllers\ClientController@about')->name('client.aboutus');
 Route::get('/contact', 'App\Http\Controllers\ClientController@contact')->name('client.contact');
 
+Route::get('cart', 'App\Http\Controllers\ProductController@cart')->name('cart');
+Route::get('add-to-cart/{id}','App\Http\Controllers\ProductController@addToCart')->name('add_to_cart');
+Route::patch('update-cart','App\Http\Controllers\ProductController@updatecart')->name('update_cart');
+Route::delete('remove-from-cart','App\Http\Controllers\ProductController@removecart')->name('remove_from_cart');
+
 
 
 
