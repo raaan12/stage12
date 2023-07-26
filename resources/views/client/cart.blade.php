@@ -24,11 +24,11 @@
                     </div>
                 </div>
             </td>
-            <td data-th="Price">${{ $details['price'] }}</td>
+            <td data-th="Price">dt{{ $details['price'] }}</td>
             <td data-th="Quantity">
                 <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" min="1" />
             </td>
-            <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
+            <td data-th="Subtotal" class="text-center">dt{{ $details['price'] * $details['quantity'] }}</td>
             <td class="actions" data-th="">
                 <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash-o"></i> Delete</button>
             </td>
@@ -39,14 +39,14 @@
     <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <h3><strong>Total ${{ $total }}</strong></h3>
+                <h3><strong>Total dt{{ $total }}</strong></h3>
             </td>
         </tr>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ route('client.index') }}"class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
-                <button class="btn btn-success"><i class="fa fa-money"></i> Checkout</button>
-            </td>
+                <a href="{{ route('client.index')}}"class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
+                <p class="btn btn-primary"><a href="{{route('client.confirmation')}}" class="btn btn-primary btn-block text-center" role="button">validate order</a> </p>
+                </td>
         </tr>
     </tfoot>
 </table>

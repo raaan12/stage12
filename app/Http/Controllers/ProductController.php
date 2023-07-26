@@ -157,15 +157,15 @@ return redirect()->route('products.index')->with('success', 'Product updated suc
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product add to cart successfully!');
     }
-    public function updatecart(Request $request)
-    {
-        if($request->id && $request->quantity){
-            $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            session()->flash('success', 'Cart successfully updated!');
-        }
-    }
+    // public function updatecart(Request $request)
+    // {
+    //     if($request->id && $request->quantity){
+    //         $cart = session()->get('cart');
+    //         $cart[$request->id]["quantity"] = $request->quantity;
+    //         session()->put('cart', $cart);
+    //         session()->flash('success', 'Cart successfully updated!');
+    //     }
+    // }
  
     public function removecart(Request $request)
     {

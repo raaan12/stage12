@@ -17,10 +17,17 @@ class Product extends Model
         'photo',
 
         ];
+        // Define the one-to-many relationship with orders
 
         public function category()
         {
             return $this->belongsTo(Category::class, 'categoryId');
         }
+
+        // Define the many-to-many relationship with orders
+    public function commande()
+    {
+        return $this->belongsToMany(Order::class, 'ligneCommande')->withPivot('quantity');
+    }
     
 }

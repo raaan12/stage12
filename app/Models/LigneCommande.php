@@ -13,4 +13,14 @@ class LigneCommande extends Model
         'productId',
         'quantity',
     ];
+     // Define the inverse relationships
+     public function product()
+     {
+         return $this->belongsTo(Product::class);
+     }
+ 
+     public function order()
+     {
+         return $this->belongsTo(OCommanderder::class);
+     }
 }

@@ -13,54 +13,34 @@ class CommandeController extends Controller
     public function index()
     {
         $commande = Commande::orderBy('created_at', 'DESC')->get();
-        return view('commandes.index', compact('commande'));    
+        return view('commandes.index', compact('commande'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('client.confirmation');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        // // Validate the form data
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|email|max:255',
+        //     'address' => 'required|string|max:500',
+        //     // Add more validation rules for other fields as needed
+        // ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Commande $commande)
-    {
-        //
-    }
+        // // Store the commande details in the database
+        // $commande = new Commande();                                                        
+        // $commande->name = $request->name;
+        // $commande->email = $request->email;
+        // $commande->address = $request->address;
+        // // Add more fields as needed
+        // $commande->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Commande $commande)
-    {
-        //
-    }
+        // // You can also associate the commande with the products in the shopping cart here
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Commande $commande)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Commande $commande)
-    {
-        //
+        // // After saving the commande details, you can redirect the user to the payment page or a confirmation page
+        // return redirect()->route('payment')->with('success', 'commande placed successfully! Please proceed with payment.');
     }
 }

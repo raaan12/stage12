@@ -14,4 +14,9 @@ class Commande extends Model
         'etat',
         'clientId',
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'ligneCommande')->withPivot('quantity');
+    }
 }

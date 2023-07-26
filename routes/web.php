@@ -36,6 +36,11 @@ Route::get('add-to-cart/{id}','App\Http\Controllers\ProductController@addToCart'
 Route::patch('update-cart','App\Http\Controllers\ProductController@updatecart')->name('update_cart');
 Route::delete('remove-from-cart','App\Http\Controllers\ProductController@removecart')->name('remove_from_cart');
 
+// routes/web.php
+
+Route::get('/order/create', 'App\Http\Controllers\CommandeController@create')->name('client.confirmation');
+Route::post('/order', 'App\Http\Controllers\CommandeController@store')->name('store_order');
+
 
 
 
