@@ -48,8 +48,6 @@ public function store(Request $request)
         'price' => ['required', 'numeric'],
         'quantity' => ['required', 'integer'],
         'categoryId' => ['required', 'exists:categories,id'],
-        'colorId' => ['required', 'exists:colors,id'],
-        'sizeId' => ['required', 'exists:sizes,id'],
         'photo' => ['nullable', 'image', 'max:2048'], // Max file size: 2 MB (you can adjust it as needed)
 
     ]);
@@ -60,9 +58,7 @@ public function store(Request $request)
     $product->price = $request->price;
     $product->quantity = $request->quantity;
     $product->categoryId = $request->categoryId;
-    $product->sizeId = $request->sizeId;
-    $product->colorId = $request->colorId;
-
+   
     if ($request->hasFile('photo')) {
         $imagePath = $request->file('photo')->store('product_images', 'public');
         $product->photo = $imagePath;
@@ -87,46 +83,44 @@ public function store(Request $request)
      */
     public function edit(string $id)
     {
-        {
-            $product = Product::findOrFail($id);
-            $categories = Category::all(); // Fetch all categories
-            $sizes = Size::all();
-            $colors = Color::all();
-            return view('products.edit', compact('product', 'categories', 'sizes', 'colors'));
-        }
+
+        $product = Product::findOrFail($id);
+        $categories = Category::all(); // Fetch all categories
+        $sizes = Size::all();
+        $colors = Color::all();
+        return view('products.edit', compact('product', 'categories', 'sizes', 'colors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
 
-     public function update(Request $request, string $id)
-     {
+    public function update(Request $request, string $id)
+    {
         $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->quantity= $request->quantity;
+        $product->quantity = $request->quantity;
         $product->categoryId = $request->categoryId;
-        $product->sizeId = $request->sizeId;
-        $product->colorId = $request->colorId;
-        
-// Handle the image update
-if ($request->hasFile('photo')) {
-    // Delete the old image if it exists
-    if ($product->photo && Storage::exists('public/' . $product->photo)) {
-        Storage::delete('public/' . $product->photo);
-    }
-    
-    // Save the new image and update the product's photo field
-    $imagePath = $request->file('photo')->store('product_images', 'public');
-    $product->photo = $imagePath;
-}
 
-// Save the updated product
-$product->save();
-return redirect()->route('products.index')->with('success', 'Product updated successfully');
-}
+
+        // Handle the image update
+        if ($request->hasFile('photo')) {
+            // Delete the old image if it exists
+            if ($product->photo && Storage::exists('public/' . $product->photo)) {
+                Storage::delete('public/' . $product->photo);
+            }
+
+            // Save the new image and update the product's photo field
+            $imagePath = $request->file('photo')->store('product_images', 'public');
+            $product->photo = $imagePath;
+        }
+
+        // Save the updated product
+        $product->save();
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
+    }
 
 
 

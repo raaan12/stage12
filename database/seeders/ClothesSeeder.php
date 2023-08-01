@@ -3,15 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\File;
-
-use Faker\Factory as Faker;
-use Illuminate\Support\Str;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\File;
 
 class ClothesSeeder extends Seeder
 {
@@ -30,68 +25,25 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
-                'sizeId'=> 1, 
-
-                'photo' => 'product4.jpg', // Replace with the actual image filename for Product 1
+                'photo' => 'product4.jpg',
             ],
             [
                 'name' => 'Product 2',
-                'description' => 'Description for Product 1',
+                'description' => 'Description for Product 2',
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
-                'sizeId'=> 1, 
-                'colorId'=> 1, 
-
-                'photo' => 'product42.jpg', // Replace with the actual image filename for Product 1
-            ],            [
-                'name' => 'Product 3',
-                'description' => 'Description for Product 1',
-                'price' => 29.99,
-                'quantity' => 100,
-                'categoryId' => 1,
-                'sizeId'=> 1, 
-                'colorId'=> 1, 
-
-                'photo' => 'product43.jpg', // Replace with the actual image filename for Product 1
-            ],            [
-                'name' => 'Product 4',
-                'description' => 'Description for Product 1',
-                'price' => 29.99,
-                'quantity' => 100,
-                'categoryId' => 1,
-                'sizeId'=> 1, 
-                'colorId'=> 1, 
-
-                'photo' => 'product45.jpg', // Replace with the actual image filename for Product 1
-            ],
-            [
-                'name' => 'Product 5',
-                'description' => 'Description for Product 1',
-                'price' => 29.99,
-                'quantity' => 100,
-                'categoryId' => 1,
-                'sizeId'=> 1, 
-                'colorId'=> 1,
-                'photo' => 'product41.jpg',// Replace with the actual image filename for Product 2
-            ],
-            [
-                'name' => 'Product 6',
-                'description' => 'Description for Product 1',
-                'price' => 29.99,
-                'quantity' => 100,
-                'categoryId' => 1,
-                'sizeId'=> 1, 
-                'colorId'=> 1,
-                'photo' => 'product3.png', // Replace with the actual image filename for Product 1
+                'photo' => 'product42.jpg',
             ],
             // Add more products here
         ];
-    
+
         foreach ($products as $productData) {
+            $product = Product::create($productData);
+            
             // Get the full path to the image in the product_images folder
             $imagePath = storage_path('app/public/product_images/' . $productData['photo']);
-    
+            
             // Check if the image exists in the storage
             if (File::exists($imagePath)) {
                 // Create the product and save it to the database
@@ -102,6 +54,15 @@ class ClothesSeeder extends Seeder
                 // Image not found, handle error if needed
                 // For now, we'll just skip this product
                 continue;
+            }
+            
+            // Associate sizes and colors with the product using the pivot table
+            $sizes = Size::all();
+            $colors = Color::all();
+            foreach ($sizes as $size) {
+                foreach ($colors as $color) {
+                    $product->size()->attach($size, ['color_id' => $color->id, 'quantity' => rand(1, 10)]);
+                }
             }
         }
     }

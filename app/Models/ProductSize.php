@@ -5,22 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LigneCommande extends Model
+class ProductSize extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'commandeId',
-        'productId',
+        'product_id',
+        'color_id',
+        'size_id',
         'quantity',
     ];
      // Define the inverse relationships
      public function product()
      {
-         return $this->belongsTo(Product::class);
+         return $this->belongsToMany(Product::class)->withPivot('product_id','quantity');
      }
- 
-     public function order()
-     {
-         return $this->belongsTo(Order::class);
-     }
+
 }

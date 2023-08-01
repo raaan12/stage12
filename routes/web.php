@@ -72,6 +72,11 @@ Route::get('/products/{id}/edit', 'App\Http\Controllers\ProductController@edit')
 Route::put('/products/{id}', 'App\Http\Controllers\ProductController@update')->name('products.update');
 Route::delete('destroy/{id}', 'App\Http\Controllers\ProductController@destroy')->name('products.destroy');
 
+Route::put('/products/{id}', 'App\Http\Controllers\ProductSizeController@update')->name('productsStock.update');
+
+
+
+
 Route::get('/ColorCreate', 'App\Http\Controllers\ColorController@create')->name('colors.create');
 Route::post('colorStore', 'App\Http\Controllers\ColorController@store')->name('colors.store');
 Route::get('colorShow/{id}', 'App\Http\Controllers\ColorController@show')->name('colors.details');

@@ -14,8 +14,6 @@ class Product extends Model
         'price',
         'quantity',
         'categoryId',
-        'sizeId',
-        'colorId',
         'photo',
 
     ];
@@ -28,12 +26,12 @@ class Product extends Model
 
     public function size()
     {
-        return $this->belongsTo(Size::class,'sizeId' );
+        return $this->belongsToMany(Size::class,'product_sizes' )->withPivot('size_id','quantity');
     }
 
     public function color()
     {
-        return $this->belongsTo(Color::class,'colorId');
+        return $this->belongsToMany(Color::class, 'product_sizes')->withPivot('color_id');
     }
     // Define the many-to-many relationship with orders
     public function commande()

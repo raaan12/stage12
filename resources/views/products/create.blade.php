@@ -54,14 +54,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                    <div class="col">
-                        <select id="size" name="sizeId" class="form-control">
-                            <option value="">Select size</option>
-                            @foreach($sizes as $size)
-                            <option value="{{ $size->id }}">{{ $size->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    
                     <div class="col">
                         <input type="text" name="price" class="form-control" placeholder="price">
                     </div>
@@ -70,14 +63,7 @@
                     <div class="col">
                         <input type="text" name="quantity" class="form-control" placeholder="quantity">
                     </div>
-                    <div class="col">
-                        <select id="color" name="colorId" class="form-control">
-                            <option value="">Select color</option>
-                            @foreach($colors as $color)
-                            <option value="{{ $color->id }}">{{ $color->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    
             </div>
             <div class="row mb-3">
                     <div class="col">

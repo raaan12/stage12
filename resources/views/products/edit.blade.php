@@ -34,64 +34,68 @@
     }
 </style>
 <div class="container">
-        <div class="form-wrapper"> 
-<h1 class="mb-0">Edit Product</h1>
-    <hr />
-    @if(Session::has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ Session::get('success') }}
-                </div>
-            @endif
-
-    <form action="{{ route('products.update', $product->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="row mb-3">
-            <div class="col">
-                <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="name" value="{{ $product->name }}" >
-            </div>
-
-            <div class="col">
-            <label class="form-label">Category</label>
-                <select name="categoryId" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col">
-                <label class="form-label">Price</label>
-                <input type="text" name="price" class="form-control" placeholder="Price" value="{{ $product->price }}" >
-            </div>
-
+    <div class="form-wrapper">
+        <h1 class="mb-0">Edit product</h1>
+        <hr />
+        @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('success') }}
         </div>
-        <div class="row">
-            <div class="col mb-3">
-                <label class="form-label">Product quantity</label>
-                <input type="text" name="quantity" class="form-control" placeholder="Quantity" value="{{ $product->quantity	 }}" >
-            </div>
-            <div class="col mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" name="description" placeholder="Descriptoin" >{{ $product->description }}</textarea>
-            </div>
-        </div>
-        <div class="col mb-3">
+        @endif
+        <h4>Edit product general information</h4>
+
+
+
+
+        <h4>Edit product stock</h4>
+        <form action="{{ route('productsStock.update', $product->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row mb-3">
                 <div class="col">
-                    <input type="file" name="photo" class="form-control" >
+                    <label class="form-label">product_id</label>
+                    <input type="text" name="product_id" class="form-control" placeholder="name" value="{{ $product->id }}" readonly>
                 </div>
-        </div>
-        <div class="row">
-            <div class="d-grid">
-                <button class="btn btn-primary">Update</button>
-                <a href="{{ route('products.index')}}" type="button" class="btn btn-warning">cancel</a>       
+
 
             </div>
-        </div>
-    </form>
 
-        </div>
+            <div class="row mb-3">
+            <div class="col">
+                    <label class="form-label">Size</label>
+                    <select name="color_id" class="form-control">
+                        <option value="">Select size</option> <!-- Empty value for the placeholder -->
+                        @foreach ($sizes as $size)
+                        <option value="{{ $size->id }}"> {{ $size->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label">Color</label>
+                    <select name="color_id" class="form-control">
+                        <option value="">Select color</option> <!-- Empty value for the placeholder -->
+                        @foreach ($colors as $color)
+                        <option value="{{ $color->id }}"> {{ $color->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label">quantity</label>
+                    <input type="text" name="quantity" class="form-control" placeholder="quantity" value="{{ $product->quantity }}">
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="d-grid">
+                    <button class="btn btn-primary">Update</button>
+                    <a href="{{ route('products.index')}}" type="button" class="btn btn-warning">cancel</a>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
 </div>
 @endsection
