@@ -35,48 +35,68 @@
     }
 </style>
 <div class="container">
-        <div class="form-wrapper">
-<h1 class="mb-0">Add Product</h1>
-    <hr />
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" name="name" class="form-control" placeholder="name">
-            </div>
-            <div class="col">
-                <select name="categoryId" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col">
-                <input type="text" name="price" class="form-control" placeholder="price">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" name="quantity" class="form-control" placeholder="quantity">
-            </div>
-            <div class="col">
-                <textarea class="form-control" name="description" placeholder="description"></textarea>
-            </div>
-        </div>
-        <div class="row mb-3">
+    <div class="form-wrapper">
+        <h1 class="mb-0">Add Product</h1>
+        <hr />
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="row mb-3">
                 <div class="col">
-                    <input type="file" name="photo" class="form-control">
+                    <input type="text" name="name" class="form-control" placeholder="name">
+                </div>
+                <div class="col">
+                    <select name="categoryId" class="form-control">
+                        <option value="">Select category</option>
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-        <div class="row">
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">save</button>
-                <a href="{{ route('colors.index')}}" type="button" class="btn btn-warning">cancel</a>       
+            <div class="row mb-3">
+                    <div class="col">
+                        <select id="size" name="sizeId" class="form-control">
+                            <option value="">Select size</option>
+                            @foreach($sizes as $size)
+                            <option value="{{ $size->id }}">{{ $size->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="price" class="form-control" placeholder="price">
+                    </div>
             </div>
-        </div>
-    </form>
-        </div>
+            <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" name="quantity" class="form-control" placeholder="quantity">
+                    </div>
+                    <div class="col">
+                        <select id="color" name="colorId" class="form-control">
+                            <option value="">Select color</option>
+                            @foreach($colors as $color)
+                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            </div>
+            <div class="row mb-3">
+                    <div class="col">
+                        <textarea class="form-control" name="description" placeholder="description"></textarea>
+                    </div>
+            </div>
+            <div class="row mb-3">
+                    <div class="col">
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+             </div>
+                <div class="row">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">save</button>
+                        <a href="{{ route('colors.index')}}" type="button" class="btn btn-warning">cancel</a>
+                    </div>
+                </div>
+        </form>
+    </div>
 </div>
 
 @endsection

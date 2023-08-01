@@ -30,6 +30,8 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
+                'sizeId'=> 1, 
+
                 'photo' => 'product4.jpg', // Replace with the actual image filename for Product 1
             ],
             [
@@ -38,6 +40,9 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
+                'sizeId'=> 1, 
+                'colorId'=> 1, 
+
                 'photo' => 'product42.jpg', // Replace with the actual image filename for Product 1
             ],            [
                 'name' => 'Product 3',
@@ -45,6 +50,9 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
+                'sizeId'=> 1, 
+                'colorId'=> 1, 
+
                 'photo' => 'product43.jpg', // Replace with the actual image filename for Product 1
             ],            [
                 'name' => 'Product 4',
@@ -52,6 +60,9 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
+                'sizeId'=> 1, 
+                'colorId'=> 1, 
+
                 'photo' => 'product45.jpg', // Replace with the actual image filename for Product 1
             ],
             [
@@ -60,6 +71,8 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
+                'sizeId'=> 1, 
+                'colorId'=> 1,
                 'photo' => 'product41.jpg',// Replace with the actual image filename for Product 2
             ],
             [
@@ -68,6 +81,8 @@ class ClothesSeeder extends Seeder
                 'price' => 29.99,
                 'quantity' => 100,
                 'categoryId' => 1,
+                'sizeId'=> 1, 
+                'colorId'=> 1,
                 'photo' => 'product3.png', // Replace with the actual image filename for Product 1
             ],
             // Add more products here

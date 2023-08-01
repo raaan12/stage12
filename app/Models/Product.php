@@ -14,20 +14,30 @@ class Product extends Model
         'price',
         'quantity',
         'categoryId',
+        'sizeId',
+        'colorId',
         'photo',
 
-        ];
-        // Define the one-to-many relationship with orders
+    ];
+    // Define the one-to-many relationship with orders
 
-        public function category()
-        {
-            return $this->belongsTo(Category::class, 'categoryId');
-        }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'categoryId');
+    }
 
-        // Define the many-to-many relationship with orders
+    public function size()
+    {
+        return $this->belongsTo(Size::class,'sizeId' );
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class,'colorId');
+    }
+    // Define the many-to-many relationship with orders
     public function commande()
     {
         return $this->belongsToMany(Order::class, 'ligneCommande')->withPivot('quantity');
     }
-    
 }

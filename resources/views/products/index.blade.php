@@ -17,6 +17,8 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Category</th>
+                <th>Size</th>
+                <th>Color</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
@@ -32,6 +34,8 @@
                         <td class="align-middle">{{ $rs->id }}</td>
                         <td class="align-middle">{{ $rs->name }}</td>
                         <td class="align-middle">{{ $rs->category->name }}</td>
+                        <td class="align-middle">{{ $rs->size ? $rs->size->name : 'N/A' }}</td>
+                        <td class="align-middle">{{ $rs->color ? $rs->color->name : 'N/A' }}</td>
                         <td class="align-middle">{{ $rs->description }}</td>  
                         <td class="align-middle">{{ $rs->price }}</td>
                         <td class="align-middle">{{ $rs->quantity }}</td>

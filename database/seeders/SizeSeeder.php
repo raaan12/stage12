@@ -34,6 +34,9 @@ class SizeSeeder extends Seeder
             [
                 'name' => 'XXL',
             ],
+            [
+                'name' => 'NULL',
+            ],
             // Add more products here
         ];
     

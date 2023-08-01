@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +18,10 @@ class ProductController extends Controller
     {
         $product = Product::orderBy('created_at', 'DESC')->get();
         $categories = Category::all(); // Fetch all categories
-        return view('products.index', compact('product', 'categories'));   
+        $colors = Color::all(); 
+        $sizes = Size::all(); 
+
+        return view('products.index', compact('product', 'categories', 'sizes', 'colors'));   
     }
 
     /**
@@ -25,8 +30,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('products.create', compact('categories'));    
-        }
+        $sizes = Size::all();
+        $colors = Color::all();
+        return view('products.create', compact('categories', 'sizes', 'colors'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,6 +48,8 @@ public function store(Request $request)
         'price' => ['required', 'numeric'],
         'quantity' => ['required', 'integer'],
         'categoryId' => ['required', 'exists:categories,id'],
+        'colorId' => ['required', 'exists:colors,id'],
+        'sizeId' => ['required', 'exists:sizes,id'],
         'photo' => ['nullable', 'image', 'max:2048'], // Max file size: 2 MB (you can adjust it as needed)
 
     ]);
@@ -51,6 +60,9 @@ public function store(Request $request)
     $product->price = $request->price;
     $product->quantity = $request->quantity;
     $product->categoryId = $request->categoryId;
+    $product->sizeId = $request->sizeId;
+    $product->colorId = $request->colorId;
+
     if ($request->hasFile('photo')) {
         $imagePath = $request->file('photo')->store('product_images', 'public');
         $product->photo = $imagePath;
@@ -67,7 +79,6 @@ public function store(Request $request)
     public function show(string $id)
     {
         $product = Product::findOrFail($id);
-  
         return view('products.details', compact('product'));
     }
 
@@ -79,8 +90,9 @@ public function store(Request $request)
         {
             $product = Product::findOrFail($id);
             $categories = Category::all(); // Fetch all categories
-        
-            return view('products.edit', compact('product', 'categories'));
+            $sizes = Size::all();
+            $colors = Color::all();
+            return view('products.edit', compact('product', 'categories', 'sizes', 'colors'));
         }
     }
 
@@ -96,6 +108,8 @@ public function store(Request $request)
         $product->price = $request->price;
         $product->quantity= $request->quantity;
         $product->categoryId = $request->categoryId;
+        $product->sizeId = $request->sizeId;
+        $product->colorId = $request->colorId;
         
 // Handle the image update
 if ($request->hasFile('photo')) {
