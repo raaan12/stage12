@@ -17,11 +17,11 @@
             <th>#</th>
             <th>Name</th>
             <th>Category</th>
-            <th>Size</th>
-            <th>Color</th>
+            <!-- <th>Size</th>
+            <th>Color</th> -->
             <th>Description</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th>Stock</th>
             <th>Photo</th>
             <th>Update/Delete</th>
 
@@ -34,7 +34,7 @@
             <td class="align-middle">{{ $rs->id }}</td>
             <td class="align-middle">{{ $rs->name }}</td>
             <td class="align-middle">{{ $rs->category->name }}</td>
-            <td class="align-middle">
+            <!-- <td class="align-middle">
                 @if ($rs->size->isNotEmpty())
                 @foreach ($rs->size as $size)
                 {{ $size->name }},
@@ -42,8 +42,8 @@
                 @else
                 N/A
                 @endif
-            </td>
-            <td class="align-middle">
+            </td> -->
+            <!-- <td class="align-middle">
                 @if ($rs->color->isNotEmpty())
                 @foreach ($rs->color as $color)
                 {{ $color->name }},
@@ -51,10 +51,24 @@
                 @else
                 N/A
                 @endif
-            </td>
+            </td> -->
             <td class="align-middle">{{ $rs->description }}</td>
             <td class="align-middle">{{ $rs->price }}</td>
-            <td class="align-middle">{{ $rs->quantity }}</td>
+            <td class="align-middle">
+                @if ($rs->size->isNotEmpty())
+                @foreach ($rs->size as $size)
+                @php
+                $quantity = $size->pivot->quantity;
+                $color_id = $rs->color->where('id', $size->pivot->color_id)->first()->pivot->color_id;
+                $color = \App\Models\Color::find($color_id);
+
+                @endphp
+                Size: {{ $size->name }} - Quantity: {{ $quantity }} - Color: {{ $color ? $color->name : 'N/A' }}<br>
+                @endforeach
+                @else
+                N/A
+                @endif
+            </td>
             <td class="align-middle">
                 @if ($rs->photo)
                 <img src="{{ asset('storage/' . $rs->photo) }}" alt="{{'no picture'}}" style="max-height: 100px; max-width: 100px;">

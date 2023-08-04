@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');            
             $table->text('description');            
             $table->float('price');            
-            $table->integer('quantity'); 
             $table->foreignId('categoryId')->constrained('categories');
             $table->string('photo');            
             $table->timestamps();

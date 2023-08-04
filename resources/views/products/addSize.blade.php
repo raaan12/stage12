@@ -42,11 +42,6 @@
             {{ Session::get('success') }}
         </div>
         @endif
-        <h4>Edit product general information</h4>
-
-
-
-
         <h4>Edit product stock</h4>
         <form action="{{ route('productsStock.store', $product->id) }}" method="POST">
             @csrf
@@ -60,57 +55,75 @@
 
             </div>
 
-            <div class="row mb-3">
+            <div class="row">
                 <div class="col">
-                    <div class="d-grid">
+                    <div id="sizeColorContainer">
+                        <div class="size-color-input mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Size</label>
+                                    <select name="size_id" class="form-control">
+                                        <option value="">Select size</option>
+                                        @foreach ($sizes as $size)
+                                        <option value="{{ $size->id }}">{{ $size->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Color</label>
+                                    <select name="color_id" class="form-control">
+                                        <option value="">Select color</option>
+                                        @foreach ($colors as $color)
+                                        <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                        <label class="form-label">Size</label>
-                        <select name="size_id" class="form-control">
-                            <option value="">Select size</option> <!-- Empty value for the placeholder -->
-                            @foreach ($sizes as $size)
-                            <option value="{{ $size->id }}"> {{ $size->name }}</option>
-                            @endforeach
-                        </select>
+                                <div class="col">
+                                    <label class="form-label">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" placeholder="quantity" value="{{ $product->quantity }}">
+                                </div>
+
+                                <!-- hidden field-->
+                                <!-- <div class="row" id="hiddenFields" style="display: none;">
+                                    <div class="col">
+                                        <label class="form-label">Color</label>
+                                        <select name="color_id" class="form-control">
+                                            <option value="">Select color</option>
+                                            @foreach ($colors as $color)
+                                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Quantity</label>
+                                        <input type="text" name="quantity" class="form-control" placeholder="quantity" value="{{ $product->quantity }}">
+                                    </div>
+                                </div> -->
+                                <!-- hidden field-->
+                            </div>
+                        </div>
                     </div>
+                    <!-- <a href="#" type="button" id="showHiddenFieldsButton" class="btn btn-warning" style="height: 35px; margin: 20px">Add new color</a> -->
+
                 </div>
-
-            </div>
-            <div class="row mb-3">
-
-                <div class="col">
-                    <div class="d-grid">
-
-                        <label class="form-label">Color</label>
-                        <select name="color_id" class="form-control">
-                            <option value="">Select color</option> <!-- Empty value for the placeholder -->
-                            @foreach ($colors as $color)
-                            <option value="{{ $color->id }}"> {{ $color->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-
-                    <label class="form-label">quantity</label>
-                    <input type="text" name="quantity" class="form-control" placeholder="quantity" value="{{ $product->quantity }}">
-                    <a href="#" id="addNewColorBtn" type="button" class="btn btn-warning" style="background-color:#DFD9FF;">Add new color</a>
-                </div>
-
             </div>
             <div class="row">
-        <div class="d-grid">
-            <button class="btn btn-primary">Done</button>
-            <a href="{{ route('products.index')}}" type="button" class="btn btn-warning">cancel</a>
+                <div class="d-grid">
+                    <button class="btn btn-primary">Done</button>
+                    <a href="{{ route('products.index')}}" type="button" class="btn btn-warning">cancel</a>
 
-        </div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
 
 
 
-    </form>
+
+
 
 </div>
 </div>

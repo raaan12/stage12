@@ -49,17 +49,14 @@ public function store(Request $request)
         'name' => ['required', 'string', 'max:255'],
         'description' => ['required', 'string'],
         'price' => ['required', 'numeric'],
-        'quantity' => ['required', 'integer'],
         'categoryId' => ['required', 'exists:categories,id'],
         'photo' => ['nullable', 'image', 'max:2048'], // Max file size: 2 MB (you can adjust it as needed)
 
     ]);
-
     $product = new Product();
     $product->name = $request->name;
     $product->description = $request->description;
     $product->price = $request->price;
-    $product->quantity = $request->quantity;
     $product->categoryId = $request->categoryId;
    
     if ($request->hasFile('photo')) {
@@ -69,6 +66,33 @@ public function store(Request $request)
     $product->save();
     return redirect()->route('products.index')->with('success', 'Product created successfully');
 }
+public function update(Request $request, string $id)
+{
+    $product = Product::findOrFail($id);
+    $product->name = $request->name;
+    $product->description = $request->description;
+    $product->price = $request->price;
+    $product->categoryId = $request->categoryId;
+
+
+    // Handle the image update
+    if ($request->hasFile('photo')) {
+        // Delete the old image if it exists
+        if ($product->photo && Storage::exists('public/' . $product->photo)) {
+            Storage::delete('public/' . $product->photo);
+        }
+
+        // Save the new image and update the product's photo field
+        $imagePath = $request->file('photo')->store('product_images', 'public');
+        $product->photo = $imagePath;
+    }
+
+    // Save the updated product
+    $product->save();
+    return redirect()->route('products.index')->with('success', 'Product updated successfully');
+}
+
+
 
   
 
@@ -98,34 +122,7 @@ public function store(Request $request)
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request, string $id)
-    {
-        $product = Product::findOrFail($id);
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->quantity = $request->quantity;
-        $product->categoryId = $request->categoryId;
-
-
-        // Handle the image update
-        if ($request->hasFile('photo')) {
-            // Delete the old image if it exists
-            if ($product->photo && Storage::exists('public/' . $product->photo)) {
-                Storage::delete('public/' . $product->photo);
-            }
-
-            // Save the new image and update the product's photo field
-            $imagePath = $request->file('photo')->store('product_images', 'public');
-            $product->photo = $imagePath;
-        }
-
-        // Save the updated product
-        $product->save();
-        return redirect()->route('products.index')->with('success', 'Product updated successfully');
-    }
-
-
+   
 
 
 

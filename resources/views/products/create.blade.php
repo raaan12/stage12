@@ -59,12 +59,7 @@
                         <input type="text" name="price" class="form-control" placeholder="price">
                     </div>
             </div>
-            <div class="row mb-3">
-                    <div class="col">
-                        <input type="text" name="quantity" class="form-control" placeholder="quantity">
-                    </div>
-                    
-            </div>
+
             <div class="row mb-3">
                     <div class="col">
                         <textarea class="form-control" name="description" placeholder="description"></textarea>
@@ -78,7 +73,7 @@
                 <div class="row">
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">save</button>
-                        <a href="{{ route('colors.index')}}" type="button" class="btn btn-warning">cancel</a>
+                        <a href="{{ route('products.index')}}" type="button" class="btn btn-warning">cancel</a>
                     </div>
                 </div>
         </form>
