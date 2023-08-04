@@ -35,7 +35,7 @@ Route::get('cart', 'App\Http\Controllers\ProductController@cart')->name('cart');
 Route::get('add-to-cart/{id}','App\Http\Controllers\ProductController@addToCart')->name('add_to_cart');
 Route::patch('update-cart','App\Http\Controllers\ProductController@updatecart')->name('update_cart');
 Route::delete('remove-from-cart','App\Http\Controllers\ProductController@removecart')->name('remove_from_cart');
-Route::get('/products/{id}/dertails', 'App\Http\Controllers\ClientController@show')->name('product.detail');
+Route::get('/products/{id}/detail', 'App\Http\Controllers\ClientController@customize')->name('product.detail');
 
 
 // routes/web.php

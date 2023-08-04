@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function show(string $id)
+
+    public function customize(string $id)
     {
-        $product = Product::findOrFail($id);
         return view('client.details', compact('product'));
     }
 

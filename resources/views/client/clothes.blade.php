@@ -19,7 +19,7 @@
                 <p class="card-text">Price: {{ $clothe->price }} dt</p>
                 <p>
                     <i class="fas fa-terminal"></i>
-                    <a href="{{ route('product.detail', $clothe->id) }}">Show more</a>
+                    <a href="#">Show more</a>
                 </p>
                 <p class="btn btn-primary"><a href="{{ route('add_to_cart', $clothe->id) }}" class="btn btn-primary btn-block text-center" role="button">Add to cart</a> </p>
 

@@ -50,8 +50,7 @@ public function store(Request $request)
         'description' => ['required', 'string'],
         'price' => ['required', 'numeric'],
         'categoryId' => ['required', 'exists:categories,id'],
-        'photo' => ['nullable', 'image', 'max:2048'], // Max file size: 2 MB (you can adjust it as needed)
-
+        'photo' => ['nullable', 'image', 'max:2048'],
     ]);
     $product = new Product();
     $product->name = $request->name;
@@ -150,7 +149,6 @@ public function update(Request $request, string $id)
         $product = Product::findOrFail($id);
  
         $cart = session()->get('cart', []);
- 
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         }  else {
