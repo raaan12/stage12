@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function show(string $id)
+    {
+        $product = Product::findOrFail($id);
+        return view('client.details', compact('product'));
+    }
+
     public function index(){
         return view('client.index');
 

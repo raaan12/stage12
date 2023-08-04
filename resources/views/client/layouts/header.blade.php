@@ -19,6 +19,8 @@
       <link rel="stylesheet" href="css/responsive.css">
       <!-- fevicon -->
       <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-ZJK6Mg5T1thWY93PQYs2hVjxmzMyzPF6v1L8sOj4taL0c+jgQeIy6+uah1G3TXx8f1B3UOobahvKlrJy9TnNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->

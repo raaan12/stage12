@@ -35,6 +35,8 @@ Route::get('cart', 'App\Http\Controllers\ProductController@cart')->name('cart');
 Route::get('add-to-cart/{id}','App\Http\Controllers\ProductController@addToCart')->name('add_to_cart');
 Route::patch('update-cart','App\Http\Controllers\ProductController@updatecart')->name('update_cart');
 Route::delete('remove-from-cart','App\Http\Controllers\ProductController@removecart')->name('remove_from_cart');
+Route::get('/products/{id}/dertails', 'App\Http\Controllers\ClientController@show')->name('product.detail');
+
 
 // routes/web.php
 
@@ -70,7 +72,7 @@ Route::post('store', 'App\Http\Controllers\ProductController@store')->name('prod
 Route::get('/products/{id}/AddSize', 'App\Http\Controllers\ProductSizeController@edit')->name('products.addSize');
 Route::put('/products/{id}', 'App\Http\Controllers\ProductController@update')->name('products.update');
 Route::delete('destroy/{id}', 'App\Http\Controllers\ProductController@destroy')->name('products.destroy');
-Route::get('/products/{id}/dertails', 'App\Http\Controllers\ProductController@show')->name('products.details');
+Route::get('/products/{id}/details', 'App\Http\Controllers\ProductController@show')->name('products.details');
 Route::get('/products/{id}/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
 
 Route::put('/products/{id}/stock', 'App\Http\Controllers\ProductSizeController@update')->name('productsStock.update');

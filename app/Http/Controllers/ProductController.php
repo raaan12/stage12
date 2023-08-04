@@ -141,7 +141,7 @@ public function update(Request $request, string $id)
 
     public function cart()
     {
-        $product = Product::orderBy('quantity', 'DESC')->get();
+        $product = Product::all();
 
         return view('client.cart',compact('product'));
     }
@@ -158,7 +158,6 @@ public function update(Request $request, string $id)
                 "name" => $product->name,
                 "photo" => $product->photo,
                 "price" => $product->price,
-                "quantity" => 1
             ];
         }
  

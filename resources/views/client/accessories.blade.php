@@ -11,18 +11,21 @@
 
 <div class="row">
     @foreach ($accessories as $accessory)
-        <div class="col-md-4">
-            <div class="card mb-4">
+    <div class="col-md-4">
+        <div class="card mb-4">
             <img src="{{ asset('storage/' . $accessory->photo) }}" class="card-img-top" alt="{{ $accessory->name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $accessory->name }}</h5>
-                    <p class="card-text">{{ $accessory->description }}</p>
-                    <p class="card-text">Price: {{ $accessory->price }} dt</p>
-                    <p class="card-text">Quantity: {{ $accessory->quantity }}</p>
-                    <p class="btn btn-primary"><a href="{{ route('add_to_cart', $accessory->id) }}" class="btn btn-primary btn-block text-center" role="button">Add to cart</a> </p>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ $accessory->name }}</h5>
+                <p class="card-text">{{ $accessory->description }}</p>
+                <p class="card-text">Price: {{ $accessory->price }} dt</p>
+                <p>
+                    <i class="fas fa-terminal"></i>
+                    <a href="{{ route('product.detail', $accessory->id) }}">Show more</a>
+                </p>
+                <p class="btn btn-primary"><a href="{{ route('add_to_cart', $accessory->id) }}" class="btn btn-primary btn-block text-center" role="button">Add to cart</a> </p>
             </div>
         </div>
+    </div>
     @endforeach
 </div>
 @endsection
