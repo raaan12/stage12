@@ -35,22 +35,22 @@
             <td class="align-middle">{{ $rs->name }}</td>
             <td class="align-middle">{{ $rs->category->name }}</td>
             <td class="align-middle">
-                @if ($rs->sizes)
-                    @foreach ($rs->sizes as $size)
-                        {{ $size->name }},
-                    @endforeach
+                @if ($rs->size->isNotEmpty())
+                @foreach ($rs->size as $size)
+                {{ $size->name }},
+                @endforeach
                 @else
-                    N/A
+                N/A
                 @endif
             </td>
             <td class="align-middle">
-            @if ($rs->sizes)
-                @foreach ($rs->colors as $color)
+                @if ($rs->color->isNotEmpty())
+                @foreach ($rs->color as $color)
                 {{ $color->name }},
                 @endforeach
-            @else
+                @else
                 N/A
-                @endif               
+                @endif
             </td>
             <td class="align-middle">{{ $rs->description }}</td>
             <td class="align-middle">{{ $rs->price }}</td>
@@ -66,7 +66,7 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a href="{{ route('products.details', $rs->id) }}" type="button" class="btn btn-secondary">Detail</a>
                     <a href="{{ route('products.edit', $rs->id)}}" type="button" class="btn btn-warning">Edit</a>
-
+                    <a href="{{ route('products.addSize', $rs->id)}}" type="button" class="btn btn-warning">Add size</a>
                     <form action="{{ route('products.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete product number {{ $rs->id }} ?')">
                         @csrf
                         @method('DELETE')

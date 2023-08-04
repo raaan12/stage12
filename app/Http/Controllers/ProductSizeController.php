@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class ProductSizeController extends Controller
 {
+
     public function store(Request $request)
     {
         $request->validate([
@@ -31,7 +32,7 @@ class ProductSizeController extends Controller
         $product = Product::findOrFail($id);
         $sizes = Size::all();
         $colors = Color::all();
-        return view('products.edit', compact('product', 'categories', 'sizes', 'colors'));
+        return view('products.addSize', compact('product', 'sizes', 'colors'));
     }
 
     /**

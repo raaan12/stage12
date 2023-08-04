@@ -67,12 +67,14 @@ require __DIR__.'/auth.php';
 
 Route::get('/ProductCreate', 'App\Http\Controllers\ProductController@create')->name('products.create');
 Route::post('store', 'App\Http\Controllers\ProductController@store')->name('products.store');
-Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('products.details');
-Route::get('/products/{id}/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
+Route::get('/products/{id}/AddSize', 'App\Http\Controllers\ProductSizeController@edit')->name('products.addSize');
 Route::put('/products/{id}', 'App\Http\Controllers\ProductController@update')->name('products.update');
 Route::delete('destroy/{id}', 'App\Http\Controllers\ProductController@destroy')->name('products.destroy');
+Route::get('/products/{id}/dertails', 'App\Http\Controllers\ProductController@show')->name('products.details');
+Route::get('/products/{id}/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
 
-Route::put('/products/{id}', 'App\Http\Controllers\ProductSizeController@update')->name('productsStock.update');
+Route::put('/products/{id}/stock', 'App\Http\Controllers\ProductSizeController@update')->name('productsStock.update');
+Route::put('/products/{id}/s', 'App\Http\Controllers\ProductSizeController@store')->name('productsStock.store');
 
 
 

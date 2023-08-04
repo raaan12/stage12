@@ -35,6 +35,9 @@ class ProductController extends Controller
         return view('products.create', compact('categories', 'sizes', 'colors'));
     }
 
+
+
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -88,7 +91,7 @@ public function store(Request $request)
         $categories = Category::all(); // Fetch all categories
         $sizes = Size::all();
         $colors = Color::all();
-        return view('products.edit', compact('product', 'categories', 'sizes', 'colors'));
+        return view('products.editProduct', compact('product', 'categories', 'sizes', 'colors'));
     }
 
     /**
