@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Size;
+use App\Models\Color;
+
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,12 @@ class ClientController extends Controller
     }
 
     public function index(){
-        return view('client.index');
+        $clothes = Product::where('categoryId', 1)->get();
+        $accessories = Product::where('categoryId', 2)->get(); // to get the product with accessories category
+        $sizes = Size::all();
+        $colors = Color::all();
+
+        return view('client.index', compact('clothes', 'accessories', 'colors', 'sizes'));
 
     }
     public function clothes()
