@@ -12,17 +12,13 @@
             <p class="price_text"><span style="color: #262626;"> Price:</span> dt {{ $clothe->price }} </p>
             <div class="tshirt_img"> <img src="{{ asset('storage/' . $clothe->photo) }}" alt="{{ $clothe->name }}"></div>
             <div class="btn_main">
-            <a href="#" class="buy_now_button" data-clothe-id="{{ $clothe->id }}">Buy Now</a>
+               <button class="buy_now_button" data-clothe-id="{{ $clothe->id }}" data-toggle="modal" data-target="#modal{{ $clothe->id }}">Buy Now</button>
                <div class="seemore_bt"><a href="#">See More</a></div>
             </div>
 
          </div>
       </div>
-      @endforeach
-   </div>
-</div>
-
-<div id="modal" class="modal">
+      <div id="modal{{ $clothe->id }}" class="modal">
    <div class="modal-content">
       <span class="close">&times;</span>
       <div class="size-color-input mb-3">
@@ -47,7 +43,10 @@
             </div>
          </div>
       </div>
-      <div class="buy_bt"><a href="{{ route('add_to_cart', $clothe->id) }}" data-clothe-id="{{ $clothe->id }}">Add to cart</a></div>
+      <div class="buy_bt"><button class="add_to_cart_button" data-clothe-id="{{ $clothe->id }}">Add to cart</button></div>
+   </div>
+</div>
+      @endforeach
    </div>
 </div>
 
@@ -55,48 +54,79 @@
 
 
 
+
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-   const modal = document.getElementById('modal');
-   const closeButton = document.querySelector('.close');
-   const buyButtons = document.querySelectorAll('.buy_now_button');
-   const addToCartButton = document.getElementById('add_to_cart_button');
-   const sizeSelect = document.querySelector('select[name="size_id"]');
-   const colorSelect = document.querySelector('select[name="color_id"]');
+   document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('modal');
+      const closeButton = document.querySelector('.close');
+      const buyButtons = document.querySelectorAll('.buy_now_button');
+      const addToCartButtons = document.querySelectorAll('.add_to_cart_button');
+      const sizeSelect = document.querySelector('select[name="size_id"]');
+      const colorSelect = document.querySelector('select[name="color_id"]');
 
-   // Fonction pour afficher le modèle
-   function showModal() {
-      modal.style.display = 'block';
-   }
+      // Fonction pour afficher le modèle
+      function showModal() {
+         modal.style.display = 'block';
+      }
 
-   // Fonction pour masquer le modèle
-   function hideModal() {
-      modal.style.display = 'none';
-   }
+      // Fonction pour masquer le modèle
+      function hideModal() {
+         modal.style.display = 'none';
+      }
 
-   // Gérer le clic sur le bouton "Buy Now"
-   buyButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-         e.preventDefault();
-         const clotheId = button.getAttribute('data-clothe-id');
-         // Ici, vous pouvez effectuer des actions supplémentaires en fonction de l'ID de l'article
-         showModal();
+      // Gérer le clic sur le bouton "Buy Now"
+      buyButtons.forEach(button => {
+         button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const clotheId = button.getAttribute('data-clothe-id');
+            // Ici, vous pouvez effectuer des actions supplémentaires en fonction de l'ID de l'article
+            showModal();
+         });
       });
+      
+      // Gérer le clic sur le bouton de fermeture du modèle
+      closeButton.addEventListener('click', hideModal);
+
+
+      // Gérer le clic sur le bouton "Add to Cart"
+      addToCartButtons.forEach(button => {
+         button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const clotheId = button.getAttribute('data-clothe-id');
+            const selectedSize = sizeSelect.value;
+            const selectedColor = colorSelect.value;
+
+             // Ici, vous pouvez effectuer des actions pour ajouter au panier avec la taille et la couleur sélectionnées
+            // Par exemple, créer un objet avec les données du produit
+            const productData = {
+               id: clotheId,
+               size: selectedSize,
+               color: selectedColor,
+               // Ajoutez d'autres propriétés du produit ici
+            };
+
+            // Obtenez le panier actuel depuis la session (s'il existe)
+            const cart = JSON.parse(sessionStorage.getItem('cart')) || {};
+            console.log(cart);
+            if (cart[clotheId]) {
+               // Si le produit existe déjà dans le panier, incrémente la quantité
+               cart[clotheId].quantity += 1;
+            } else {
+               // Si le produit n'existe pas, ajoutez-le au panier
+               productData.quantity = 1; // Vous pouvez ajuster la quantité initiale ici
+               cart[clotheId] = productData;
+            }
+
+            // Stockez le panier mis à jour dans la session
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+
+            // Fermez le modèle
+            hideModal();
+         });
+      });
+
    });
-
-   // Gérer le clic sur le bouton de fermeture du modèle
-   closeButton.addEventListener('click', hideModal);
-
-   // Gérer le clic sur le bouton "Add to Cart" dans le modèle
-   addToCartButton.addEventListener('click', function() {
-      const selectedSize = sizeSelect.value;
-      const selectedColor = colorSelect.value;
-
-      // Ici, vous pouvez effectuer des actions pour ajouter au panier avec la taille et la couleur sélectionnées
-
-      hideModal();
-   });
-});
 </script>
 
 @endsection

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Size;
 use App\Models\Color;
 
+use App\Models\Message;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
@@ -36,10 +38,22 @@ class ClientController extends Controller
         $accessories = Product::where('categoryId', 2)->get();// to get the product with accessories category
         return view('client.accessories', compact('accessories'));
     } 
-
+    public function message(Request $request)
+{
+    $request->validate([
+        'title' => ['required', 'string', 'max:255'],
+        'corps' => ['required', 'string'],
+    ]);
+    $message = new Message();
+    $message->title = $request->title;
+    $message->corps = $request->corps;    
+    $message->save();
+    return redirect()->route('client.index');
+    }
 
     public function contact()
     {
+        Mail::to('rania.chakroun@etudiant-enit.utm.tn')->send(new \App\Mail\HelloMail());
         return view('client.contact');
     } 
 

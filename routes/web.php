@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SizeController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
-
+use App\Mail\HelloMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,19 @@ Route::get('/client', 'App\Http\Controllers\ClientController@index')->name('clie
 Route::get('/accessories', 'App\Http\Controllers\ClientController@accessories')->name('client.accessories');
 Route::get('/About Us', 'App\Http\Controllers\ClientController@about')->name('client.aboutus');
 Route::get('/contact', 'App\Http\Controllers\ClientController@contact')->name('client.contact');
+Route::post('php/messgae', 'App\Http\Controllers\ClientController@message')->name('client.message');
+// Route::get('/message', function(){
+//     Mail::to('rania.chakroun@etudiant-enit.utm.tn')
+//     -> send(new HelloMail());
+// });
+
+Route::get('send-mail', function () {       
+    Mail::to('rania.chakroun@etudiant-enit.utm.tn')->send(new \App\Mail\HelloMail());   
+
+    
+
+});
+
 
 Route::get('cart', 'App\Http\Controllers\ProductController@cart')->name('cart');
 Route::get('add-to-cart/{id}','App\Http\Controllers\ProductController@addToCart')->name('add_to_cart');

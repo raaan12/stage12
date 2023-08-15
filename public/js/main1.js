@@ -8,22 +8,20 @@
 		if ($('#contactForm').length > 0 ) {
 			$( "#contactForm" ).validate( {
 				rules: {
-					name: "required",
-					subject: "required",
-					email: {
+					title: "required",
+					corps: {
 						required: true,
-						email: true
+						corps: true
 					},
-					message: {
+					corps: {
 						required: true,
 						minlength: 5
 					}
 				},
 				messages: {
-					name: "Please enter your name",
-					subject: "Please enter your subject",
-					email: "Please enter a valid email address",
-					message: "Please enter a message"
+					
+					title: "Please enter your subject",
+					corps: "Please enter a message"
 				},
 				/* submit via ajax */
 				
@@ -33,7 +31,7 @@
 
 					$.ajax({   	
 				      type: "POST",
-				      url: "php/sendEmail.php",
+				      url: "php/message",
 				      data: $(form).serialize(),
 
 				      beforeSend: function() { 

@@ -141,7 +141,8 @@ public function update(Request $request, string $id)
         // Retrieve the quantity from the pivot table based on selected size and color
         $selectedSize = $product->size->find($selectedSizeId);
         $selectedColor = $product->color->find($selectedColorId);
-    
+        dd($selectedSize, $selectedColor);
+
         if ($selectedSize && $selectedColor) {
             $quantity = min($selectedSize->pivot->quantity, $selectedColor->pivot->quantity);
             
