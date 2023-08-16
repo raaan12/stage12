@@ -129,44 +129,95 @@ public function update(Request $request, string $id)
         return view('client.cart', compact('cart', 'products'));
     }
 
+    public function addToCart($id)
+    {
+        $product = Product::find($id);
 
+        if(!$product) {
 
-    public function addToCart($id, Request $request) {
-        $cart = session('cart', []);
-        $product = Product::with(['size', 'color'])->findOrFail($id); // Eager load size and color relationships
-        
-        $selectedSizeId = $request->input('size_id');
-        $selectedColorId = $request->input('color_id');
-        
-        // Retrieve the quantity from the pivot table based on selected size and color
-        $selectedSize = $product->size->find($selectedSizeId);
-        $selectedColor = $product->color->find($selectedColorId);
-        dd($selectedSize, $selectedColor);
+            abort(404);
 
-        if ($selectedSize && $selectedColor) {
-            $quantity = min($selectedSize->pivot->quantity, $selectedColor->pivot->quantity);
-            
-            // Check if the product already exists in the cart
-            if (array_key_exists($id, $cart)) {
-                // If it exists, update the quantity
-                $cart[$id]['quantity'] += $quantity;
-            } else {
-                // If it doesn't exist, add a new entry
-                $cart[$id] = [
-                    'price' => $product->price,
-                    'quantity' => $quantity,
-                    "name" => $product->name,
-                    "photo" => $product->photo,
-                    "size" => $selectedSize->name,
-                    "color" => $selectedColor->name,
-                ];
-            }
-    
-            session(['cart' => $cart]);
         }
-    
-        return redirect()->back(); // Redirect back to the same page
+
+        $cart = session()->get('cart');
+
+        // if cart is empty then this the first product
+        if(!$cart) {
+
+            $cart = [
+                    $id => [
+                        "name" => $product->name,
+                        "quantity" => 1,
+                        "price" => $product->price,
+                        "photo" => $product->photo
+                    ]
+            ];
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+
+            $cart[$id]['quantity']++;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+        }
+
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            "photo" => $product->photo
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
+
+    // public function addToCart($id, Request $request) {
+    //     $cart = session('cart', []);
+    //     $product = Product::with(['size', 'color'])->findOrFail($id); // Eager load size and color relationships
+        
+    //     $selectedSizeId = $request->input('size_id');
+    //     $selectedColorId = $request->input('color_id');
+        
+    //     // Retrieve the quantity from the pivot table based on selected size and color
+    //     $selectedSize = $product->size->find($selectedSizeId);
+    //     $selectedColor = $product->color->find($selectedColorId);
+    //     dd($selectedSize, $selectedColor);
+
+    //     if ($selectedSize && $selectedColor) {
+    //         $quantity = min($selectedSize->pivot->quantity, $selectedColor->pivot->quantity);
+            
+    //         // Check if the product already exists in the cart
+    //         if (array_key_exists($id, $cart)) {
+    //             // If it exists, update the quantity
+    //             $cart[$id]['quantity'] += $quantity;
+    //         } else {
+    //             // If it doesn't exist, add a new entry
+    //             $cart[$id] = [
+    //                 'price' => $product->price,
+    //                 'quantity' => $quantity,
+    //                 "name" => $product->name,
+    //                 "photo" => $product->photo,
+    //                 "size" => $selectedSize->name,
+    //                 "color" => $selectedColor->name,
+    //             ];
+    //         }
+    
+    //         session(['cart' => $cart]);
+    //     }
+    
+    //     return redirect()->back(); // Redirect back to the same page
+    // }
     
     
     
@@ -189,15 +240,15 @@ public function update(Request $request, string $id)
     //     session()->put('cart', $cart);
     //     return redirect()->back()->with('success', 'Product add to cart successfully!');
     // }
-    // public function updatecart(Request $request)
-    // {
-    //     if($request->id && $request->quantity){
-    //         $cart = session()->get('cart');
-    //         $cart[$request->id]["quantity"] = $request->quantity;
-    //         session()->put('cart', $cart);
-    //         session()->flash('success', 'Cart successfully updated!');
-    //     }
-    // }
+    public function updatecart(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart successfully updated!');
+        }
+    }
  
     public function removecart(Request $request)
     {

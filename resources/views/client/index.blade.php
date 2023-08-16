@@ -19,33 +19,35 @@
          </div>
       </div>
       <div id="modal{{ $clothe->id }}" class="modal">
-   <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="size-color-input mb-3">
-         <div class="row">
-            <div class="col">
-               <label class="form-label">Size</label>
-               <select name="size_id" class="form-control">
-                  <option value="">Select size</option>
-                  @foreach ($sizes as $size)
-                  <option value="{{ $size->id }}">{{ $size->name }}</option>
-                  @endforeach
-               </select>
+         <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="size-color-input mb-3">
+               <div class="row">
+                  <div class="col">
+                     <label class="form-label">Size</label>
+                     <select name="size_id" class="form-control">
+                        <option value="">Select size</option>
+                        @foreach ($sizes as $size)
+                        <option value="{{ $size->id }}">{{ $size->name }}</option>
+                        @endforeach
+                     </select>
+                  </div>
+                  <div class="col">
+                     <label class="form-label">Color</label>
+                     <select name="color_id" class="form-control">
+                        <option value="">Select color</option>
+                        @foreach ($colors as $color)
+                        <option value="{{ $color->id }}">{{ $color->name }}</option>
+                        @endforeach
+                     </select>
+                  </div>
+               </div>
             </div>
-            <div class="col">
-               <label class="form-label">Color</label>
-               <select name="color_id" class="form-control">
-                  <option value="">Select color</option>
-                  @foreach ($colors as $color)
-                  <option value="{{ $color->id }}">{{ $color->name }}</option>
-                  @endforeach
-               </select>
+            <div class="buy_bt"><a href="{{ url('add-to-cart/'.$clothe->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
             </div>
+
          </div>
       </div>
-      <div class="buy_bt"><button class="add_to_cart_button" data-clothe-id="{{ $clothe->id }}">Add to cart</button></div>
-   </div>
-</div>
       @endforeach
    </div>
 </div>
@@ -84,7 +86,7 @@
             showModal();
          });
       });
-      
+
       // Gérer le clic sur le bouton de fermeture du modèle
       closeButton.addEventListener('click', hideModal);
 
@@ -97,7 +99,7 @@
             const selectedSize = sizeSelect.value;
             const selectedColor = colorSelect.value;
 
-             // Ici, vous pouvez effectuer des actions pour ajouter au panier avec la taille et la couleur sélectionnées
+            // Ici, vous pouvez effectuer des actions pour ajouter au panier avec la taille et la couleur sélectionnées
             // Par exemple, créer un objet avec les données du produit
             const productData = {
                id: clotheId,

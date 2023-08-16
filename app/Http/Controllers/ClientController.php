@@ -30,7 +30,9 @@ class ClientController extends Controller
     public function clothes()
     {
         $clothes = Product::where('categoryId', 1)->get();
-        return view('client.clothes', compact('clothes'));
+        $sizes = Size::all();
+        $colors = Color::all();
+        return view('client.clothes', compact('clothes', 'colors', 'sizes'));
     } 
     
     public function accessories()
@@ -62,5 +64,12 @@ class ClientController extends Controller
         return view('client.aboutus');
     } 
 
+    public function addToCart(Request $request, $id)
+    {
+        // Use $id as the accessory ID
+        // Logic to add the product to the cart
+
+        return response()->json(['message' => 'Product added to cart successfully']);
+    }
 
 }

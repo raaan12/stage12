@@ -50,6 +50,8 @@ Route::get('add-to-cart/{id}','App\Http\Controllers\ProductController@addToCart'
 Route::patch('update-cart','App\Http\Controllers\ProductController@updatecart')->name('update_cart');
 Route::delete('remove-from-cart','App\Http\Controllers\ProductController@removecart')->name('remove_from_cart');
 Route::get('/products/{id}/detail', 'App\Http\Controllers\ClientController@customize')->name('product.detail');
+// Route::post('/add-to-cart/{id}', 'ClientController@addToCart')->name('add_to_cart');
+Route::get('add-to-cart/{id}', 'ProductController@addToCart');
 
 
 // routes/web.php

@@ -48,18 +48,21 @@
                                     @php $total += $details['price'] * $details['quantity'] @endphp
                                     @endforeach
                                     <div class="col-lg-12 col-sm-12 col-12 total-section text-right">
-                                       <p>Total: <span class="text-info">$ {{ $total }}</span></p>
+                                       <p>Total: <span class="text-info"> {{ $total }} dt</span></p>
                                     </div>
                                  </div>
                                  @if(session('cart'))
                                  @foreach(session('cart') as $id => $details)
                                  <div class="row cart-detail">
                                     <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-                                       <img src="{{ asset('img') }}/{{ $details['photo'] }}" />
+                                       <img src="{{ asset('storage/') }}/{{ $details['photo'] }}" style="width: 50px;"/>
                                     </div>
                                     <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                       <span class="price text-info"> ${{ $details['price'] }}</span> <span class="count"> Quantity:{{ $details['quantity'] }}</span>
-                                    </div>
+                                    <span class="text-info">{{ $details['name'] }}</span>
+                                    <br>                                   
+                                       <span class="count"> Quantity:{{ $details['quantity'] }}</span>
+                                       <span class="price text-info">{{ $details['price'] * $details['quantity']}} dt</span> 
+                                 </div>
                                  </div>
                                  @endforeach
                                  @endif
