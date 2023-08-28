@@ -15,7 +15,9 @@ class ClientController extends Controller
 
     public function customize(string $id)
     {
+        $product = Product::findOrFail($id); // Replace 'Product' with your model name
         return view('client.details', compact('product'));
+
     }
 
     public function index(){
@@ -64,12 +66,63 @@ class ClientController extends Controller
         return view('client.aboutus');
     } 
 
-    public function addToCart(Request $request, $id)
+
+
+    public function seeMore( string $id)
     {
-        // Use $id as the accessory ID
-        // Logic to add the product to the cart
+        return view('client.accessories');
+    } 
 
-        return response()->json(['message' => 'Product added to cart successfully']);
+    public function addToCart($id)
+    {
+        $product = Product::find($id);
+
+        if(!$product) {
+
+            abort(404);
+
+        }
+
+        $cart = session()->get('cart');
+
+        // if cart is empty then this the first product
+        if(!$cart) {
+
+            $cart = [
+                    $id => [
+                        "name" => $product->name,
+                        "quantity" => 1,
+                        "price" => $product->price,
+                        "photo" => $product->photo
+                    ]
+            ];
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+
+            $cart[$id]['quantity']++;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+        }
+
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            "photo" => $product->photo
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
-
 }

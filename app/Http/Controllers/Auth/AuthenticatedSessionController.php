@@ -15,9 +15,28 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(Request $request)
     {
-        return view('auth.login');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+    
+            if (auth()->user()->role === 'admin') {
+                return redirect()->intended(route('products.index')); // Redirection vers l'interface admin
+            } elseif (auth()->user()->role === 'client') {
+                return redirect()->intended(route('client.index')); // Redirection vers l'interface client
+            }
+        }
+    
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**
@@ -29,9 +48,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (auth()->user()->role === 'admin') {
+            return redirect()->intended(route('products.index')); // Redirect admin to admin dashboard
+        } elseif (auth()->user()->role === 'client') {
+            return redirect()->intended(route('client.index')); // Redirect client to client dashboard
+        }
+    
     }
-
     /**
      * Destroy an authenticated session.
      */

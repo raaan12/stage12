@@ -32,7 +32,7 @@ class ProfileController extends Controller
     public function edit($profile)
     {
             $profile = User::findOrFail($profile);
-            return view('profile.edit', compact('profile'));
+            return view('profile.profile', compact('profile'));
     }
 
 

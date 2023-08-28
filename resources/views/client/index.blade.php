@@ -13,7 +13,7 @@
             <div class="tshirt_img"> <img src="{{ asset('storage/' . $clothe->photo) }}" alt="{{ $clothe->name }}"></div>
             <div class="btn_main">
                <button class="buy_now_button" data-clothe-id="{{ $clothe->id }}" data-toggle="modal" data-target="#modal{{ $clothe->id }}">Buy Now</button>
-               <div class="seemore_bt"><a href="#">See More</a></div>
+               <div class="seemore_bt"><a href="{{ route('product.detail', $clothe->id) }}">See More</a></div>
             </div>
 
          </div>
@@ -48,6 +48,25 @@
 
          </div>
       </div>
+      @endforeach
+   </div>
+   <h1 class="fashion_taital">Accessories</h1>
+   <div class="row">
+      @foreach ($accessories as $accessory)
+      <div class="col-lg-4 col-sm-4">
+         <div class="box_main">
+            <h4 class="shirt_text">{{ $accessory->name }}</h4>
+            <p class="price_text"><span style="color: #262626;"> Price:</span> dt {{ $accessory->price }} </p>
+            <div class="tshirt_img"> <img src="{{ asset('storage/' . $accessory->photo) }}" alt="{{ $accessory->name }}"></div>
+            <div class="btn_main">
+           
+            <div class="buy_bt"><a href="{{ url('add-to-cart/'.$accessory->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a>
+               <div class="seemore_bt"><a href="#">See More</a></div>
+            </div>
+            </div>
+         </div>
+      </div>
+
       @endforeach
    </div>
 </div>

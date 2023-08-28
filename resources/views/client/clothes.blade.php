@@ -17,7 +17,7 @@
             <div class="tshirt_img"> <img src="{{ asset('storage/' . $clothe->photo) }}" alt="{{ $clothe->name }}"></div>
             <div class="btn_main">
                <button class="buy_now_button" data-clothe-id="{{ $clothe->id }}" data-toggle="modal" data-target="#modal{{ $clothe->id }}">Buy Now</button>
-               <div class="seemore_bt"><a href="#">See More</a></div>
+               <div class="seemore_bt"><a href="{{ route('product.detail', $clothe->id) }}">See More</a></div>
             </div>
 
          </div>
