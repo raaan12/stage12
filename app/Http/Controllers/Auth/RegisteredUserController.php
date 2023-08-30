@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+            return redirect()->intended(route('client.index')); // Redirect client to client dashboard
+          
     }
 }

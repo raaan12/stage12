@@ -3,20 +3,30 @@
       <div class="row">
          <div class="col-sm-12">
             <div class="custom_menu">
+                  <img class="rounded-circle" src="{{asset('images/logo2.png')}}" style="height: 50px; padding: left 59px;">
                <ul>
+                  <!-- logo section start -->
+
                   <li><a href="{{ route('client.index') }}">Home</a></li>
                   <li><a href="{{ route('client.clothes') }}">Clothes</a></li>
                   <li><a href="{{ route('client.accessories') }}">Accessories</a></li>
                   <li><a href="{{ route('client.aboutus') }}">About us</a></li>
                   <li><a href="{{ route('client.contact') }}">Contact</a></li>
-                  <form method="POST" action="{{ route('logout') }}">
-                     @csrf
+                  <li><a href="#">Profile</a></li>
 
-                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+
+                  <li>
+                     <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                     </x-responsive-nav-link>
-                  </form>
+                           {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                     </form>
+                  </li>
+
+                  
                </ul>
 
             </div>
@@ -25,14 +35,6 @@
    </div>
 </div>
 
-<!-- logo section start -->
-<div class="logo_section">
-   <div class="container">
-      <div class="row">
-         <div class="col-sm-12">
-            <div class="logo"><a href="index.html"><img src="LOGO"></a></div>
-         </div>
-      </div>
-   </div>
-</div>
+
+
 <!-- logo section end -->

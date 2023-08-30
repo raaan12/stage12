@@ -33,7 +33,7 @@
         </div>
 
 
-        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " href="{{ route('register') }}">
                     {{("D'ont have account?") }}
         </a>
 
@@ -44,7 +44,7 @@
                 </a>
             @endif
 
-            <x-primary-button class="ml-3">
+            <x-primary-button class="ml-3" style="background-color: #F4B48D;">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
