@@ -34,24 +34,8 @@
             <td class="align-middle">{{ $rs->id }}</td>
             <td class="align-middle">{{ $rs->name }}</td>
             <td class="align-middle">{{ $rs->category->name }}</td>
-            <!-- <td class="align-middle">
-                @if ($rs->size->isNotEmpty())
-                @foreach ($rs->size as $size)
-                {{ $size->name }},
-                @endforeach
-                @else
-                N/A
-                @endif
-            </td> -->
-            <!-- <td class="align-middle">
-                @if ($rs->color->isNotEmpty())
-                @foreach ($rs->color as $color)
-                {{ $color->name }},
-                @endforeach
-                @else
-                N/A
-                @endif
-            </td> -->
+
+            
             <td class="align-middle">{{ $rs->description }}</td>
             <td class="align-middle">{{ $rs->price }}</td>
             <td class="align-middle">

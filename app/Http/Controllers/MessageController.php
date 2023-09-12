@@ -30,16 +30,26 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.contact');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $user = auth()->user(); // Récupérer l'utilisateur actuel
+
+        $messageData = [
+            'title' => $request->input('title'),
+            'corps' => $request->input('corps'),
+            'clientId' => $user->id,
+        ];
+
+
+        $message = new Message($messageData);
+        $message->save();
+
+        return redirect()->route('message.create')->with('success', 'Message envoyé avec succès !');
+     }
+
 
     /**
      * Display the specified resource.

@@ -26,7 +26,7 @@
                         <td class="align-middle">{{ $rs->id }}</td>
                         <td class="align-middle">{{ $rs->title }}</td>
                         <td class="align-middle">{{ $rs->corps }}</td>
-                        <td class="align-middle">{{ $rs->clientId}}</td>
+                        <td class="align-middle">{{ $rs->user->name}}</td>
 
                     </tr>
                 @endforeach

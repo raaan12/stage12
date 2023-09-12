@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
@@ -29,10 +30,10 @@ class ProfileController extends Controller
         return redirect()->route('employe.index')->with('success', 'employe added successfully');
     }
 
-    public function edit($profile)
+    public function edit($employe)
     {
-            $profile = User::findOrFail($profile);
-            return view('profile.profile', compact('profile'));
+            $employe = User::findOrFail($employe);
+            return view('employe.edit', compact('employe'));
     }
 
 
@@ -51,6 +52,29 @@ class ProfileController extends Controller
          return redirect()->route('employe.index')->with('success', 'employe updated successfully');
     }
 
+    public function updateName(Request $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->adress = $request->input('adress');
+        $user->phone_number = $request->input('phone_number');
+
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Profile edited successfully.');
+    }
+    public function updatePass(Request $request)
+    {
+        $user = Auth::user();
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
+
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Profile edited successfully.');
+    }
+    
 
     /**
      * Delete the user's account.

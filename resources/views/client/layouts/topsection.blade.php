@@ -12,7 +12,7 @@
                   <li><a href="{{ route('client.accessories') }}">Accessories</a></li>
                   <li><a href="{{ route('client.aboutus') }}">About us</a></li>
                   <li><a href="{{ route('client.contact') }}">Contact</a></li>
-                  <li><a href="#">Profile</a></li>
+                  <li><a href="{{ route('client.profile') }}">Profile</a></li>
 
 
                   <li>

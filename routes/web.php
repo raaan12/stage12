@@ -32,6 +32,18 @@ Route::get('/accessories', 'App\Http\Controllers\ClientController@accessories')-
 Route::get('/About Us', 'App\Http\Controllers\ClientController@about')->name('client.aboutus');
 Route::get('/contact', 'App\Http\Controllers\ClientController@contact')->name('client.contact');
 Route::post('php/messgae', 'App\Http\Controllers\ClientController@message')->name('client.message');
+Route::get('/profile', 'App\Http\Controllers\ClientController@profile')->name('client.profile');
+Route::post('/update-name', 'App\Http\Controllers\ProfileController@updateName')->name('update.name');
+Route::post('/update-auth', 'App\Http\Controllers\ProfileController@updatePass')->name('update.pass');
+
+
+
+Route::get('/messages/create', 'App\Http\Controllers\MessageController@create')->name('message.create');
+Route::post('/messages', 'App\Http\Controllers\MessageController@store')->name('message.store');
+
+
+
+
 // Route::get('/message', function(){
 //     Mail::to('rania.chakroun@etudiant-enit.utm.tn')
 //     -> send(new HelloMail());
@@ -71,6 +83,7 @@ Route::get('/message', 'App\Http\Controllers\MessageController@index')->name('me
 Route::get('/employee', 'App\Http\Controllers\ProfileController@index')->name('employe.index');
 Route::get('/employeCreate', 'App\Http\Controllers\ProfileController@create')->name('employe.create');
 Route::post('employeStore', 'App\Http\Controllers\ProfileController@store')->name('employe.store');
+Route::put('/employe/{id}', 'App\Http\Controllers\ProfileController@update')->name('employe.update');
 Route::get('/color', 'App\Http\Controllers\ColorController@index')->name('colors.index');
 Route::get('/size', 'App\Http\Controllers\SizeController@index')->name('sizes.index');
 

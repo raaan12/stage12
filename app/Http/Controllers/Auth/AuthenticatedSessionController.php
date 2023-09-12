@@ -26,10 +26,10 @@ class AuthenticatedSessionController extends Controller
     
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-    
-            if (auth()->user()->role === 'admin') {
+            $user = auth()->user(); // Récupérer l'objet User connecté$user = auth()->user(); // Récupérer l'objet User connecté
+            if ($user->role === 'admin') {
                 return redirect()->intended(route('products.index')); // Redirection vers l'interface admin
-            } elseif (auth()->user()->role === 'client') {
+            } elseif ($user->role === 'client') {
                 return redirect()->intended(route('client.index')); // Redirection vers l'interface client
             }
         }
@@ -47,10 +47,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = auth()->user(); // Récupérer l'objet User connecté
 
-        if (auth()->user()->role === 'admin') {
+        if ($user->role === 'admin') {
             return redirect()->intended(route('products.index')); // Redirect admin to admin dashboard
-        } elseif (auth()->user()->role === 'client') {
+        } elseif ($user->role === 'client') {
             return redirect()->intended(route('client.index')); // Redirect client to client dashboard
         }
     

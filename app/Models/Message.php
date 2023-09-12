@@ -13,4 +13,9 @@ class Message extends Model
         'corps',
         'clientId',
         ];
+
+        public function user()
+        {
+            return $this->belongsTo(User::class, 'clientId');
+        }
 }

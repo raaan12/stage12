@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use App\Models\Color;
-
+use App\Models\User;
 use App\Models\Message;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
@@ -19,6 +20,14 @@ class ClientController extends Controller
         return view('client.details', compact('product'));
 
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('client.profile', compact('user'));
+    }
+
+
 
     public function index(){
         $clothes = Product::where('categoryId', 1)->get();
