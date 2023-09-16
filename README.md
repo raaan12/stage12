@@ -4,7 +4,7 @@ Bienvenue dans le projet de site web e-commerce de vente de vêtements en croche
 
 ## Description du projet
 
-Le but de ce projet est de créer une plateforme en ligne permettant à l'atelier [Nom de l'atelier] de vendre ses magnifiques créations en crochet. Le site web sera conçu pour offrir une expérience utilisateur fluide et intuitive aux clients qui souhaitent acheter des vêtements en crochet uniques et faits à la main.
+Le but de ce projet est de créer une plateforme en ligne permettant à l'atelier de vendre ses magnifiques créations en crochet. Le site web sera conçu pour offrir une expérience utilisateur fluide et intuitive aux clients qui souhaitent acheter des vêtements en crochet uniques et faits à la main.
 
 ## Fonctionnalités principales
 
