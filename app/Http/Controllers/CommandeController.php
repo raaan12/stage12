@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commande;
+use App\Models\Product;
+use App\Models\LigneCommande;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommandeController extends Controller
 {
@@ -20,27 +24,41 @@ class CommandeController extends Controller
         return view('client.confirmation');
     }
 
-    public function store(Request $request)
-    {
-        // // Validate the form data
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|email|max:255',
-        //     'address' => 'required|string|max:500',
-        //     // Add more validation rules for other fields as needed
-        // ]);
+   public function store(Request $request)
+{
+    // Récupérez les données du formulaire de livraison
+    $formData = $request->only(['name', 'email', 'address', 'phone_number']);
 
-        // // Store the commande details in the database
-        // $commande = new Commande();                                                        
-        // $commande->name = $request->name;
-        // $commande->email = $request->email;
-        // $commande->address = $request->address;
-        // // Add more fields as needed
-        // $commande->save();
+    // Récupérez le montant total depuis la variable $total du panier
+    $total = 100; // Assurez-vous d'avoir cette variable disponible ici
 
-        // // You can also associate the commande with the products in the shopping cart here
+    // Créez une nouvelle commande et définissez les champs appropriés
+    $commande = new Commande();
+    $commande->montant = $total;
+    $commande->dateLivraison = date('Y-m-d'); // Mettez la date de livraison appropriée
+    $commande->etat = 'en cours de traitement'; // Mettez l'état approprié
+    $commande->clientId = Auth::user()->id; // Utilisez l'ID du client actuellement connecté
 
-        // // After saving the commande details, you can redirect the user to the payment page or a confirmation page
-        // return redirect()->route('payment')->with('success', 'commande placed successfully! Please proceed with payment.');
+    // Enregistrez la commande dans la base de données
+    $commande->save();
+    session()->forget('cart');
+
+    // Ajoutez les produits de la commande dans la relation Many-to-Many
+    if (session('cart')) {
+        foreach (session('cart') as $id => $details) {
+            $product = Product::find($id);
+            if ($product) {
+                // Créez une nouvelle ligne de commande et définissez les champs appropriés
+                $ligneCommande = new LigneCommande();
+                $ligneCommande->commandeId = $commande->id;
+                $ligneCommande->productId = $product->id;
+                $ligneCommande->quantity = $details['quantity'];
+
+                // Enregistrez la ligne de commande dans la base de données
+                $ligneCommande->save();
+            }
+        }
     }
+    return redirect()->route('client.index');
+}
 }

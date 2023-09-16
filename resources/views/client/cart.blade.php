@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <th style="width:50%">Product</th>
+            <th style="width:50%">Name</th>
             <th style="width:10%">Price</th>
             <th style="width:8%">Quantity</th>
             <th style="width:22%" class="text-center">Subtotal</th>
@@ -24,6 +25,7 @@
                     </div>
                 </div>
             </td>
+            <td data-th="Name">{{ $details['name'] }}</td>
             <td data-th="Price">dt{{ $details['price'] }}</td>
             <td data-th="Quantity">
                 <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" min="1" />
