@@ -1,6 +1,6 @@
 ## Projet de site web e-commerce pour la vente de vêtements en crochet
 
-Bienvenue dans le projet de site web e-commerce de vente de vêtements en crochet pour l'atelier personnel de [Votre Nom].
+Bienvenue dans le projet de site web e-commerce de vente de vêtements en crochet.
 
 ## Description du projet
 
