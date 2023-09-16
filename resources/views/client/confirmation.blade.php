@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Address:</label>
-                    <input type="text" name="address" class="form-control" placeholder="address" value="{{ Auth::user()->address }}">
+                    <input type="text" name="adress" class="form-control" placeholder="adress" value="{{ Auth::user()->adress }}">
                 </div>
                 <div class="form-group">
                     <label for="phone_number">Phone:</label>
